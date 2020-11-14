@@ -1,4 +1,5 @@
-import 'EstudianteUI.dart';
+//import 'EstudianteUI.dart';
+import 'DocenteUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -12,41 +13,47 @@ class _LoginFormState extends State<LoginForm>{
 
   @override
   Widget build(BuildContext context){
-    return GestureDetector(
-        onTap: (){
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if(!currentFocus.hasPrimaryFocus){
-            currentFocus.unfocus();
-            }
-          },
-          child: Material(
-            child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [const Color.fromRGBO(53, 132, 230, 1), Color.fromRGBO(53, 62, 123, 1)],
-                begin: FractionalOffset.topCenter,
-                end: FractionalOffset.bottomCenter,
-                stops: [0.0,1.0],
-                tileMode: TileMode.clamp
+    return Scaffold(
+          backgroundColor: Color.fromRGBO(53, 62, 123, 1),
+
+          body: GestureDetector(
+          onTap: (){
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if(!currentFocus.hasPrimaryFocus){
+              currentFocus.unfocus();
+              }
+            },
+
+
+            child: Material(
+              child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [const Color.fromRGBO(53, 132, 230, 1), Color.fromRGBO(53, 62, 123, 1)],
+                  begin: FractionalOffset.topCenter,
+                  end: FractionalOffset.bottomCenter,
+                  stops: [0.0,1.0],
+                  tileMode: TileMode.clamp
+                  ),
                 ),
+              child: ListView(
+                children: [
+                  logoSeccion(),
+                  textoSeccion(),
+                  botonSeccion(),
+                ],
               ),
-            child: ListView(
-              children: [
-                logoSeccion(),
-                textoSeccion(),
-                botonSeccion(),
-              ],
-            ),
+          ),
         ),
       ),
     );
   }
 
   signIn() async {//-----------------------------codigo para verificar login------------------------------
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
-
+    Navigator.push(context, MaterialPageRoute(builder: (context) => DocentePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
     
     print("Aqui se hara el codigo para ingresar");
   }
+
 
   Container botonSeccion(){
     return Container(
@@ -56,8 +63,6 @@ class _LoginFormState extends State<LoginForm>{
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: RaisedButton(
         onPressed: () {
-            setState((){
-            });
             signIn();
             },
             color: Colors.black26,
@@ -76,8 +81,8 @@ class _LoginFormState extends State<LoginForm>{
     return Container(
       alignment: Alignment.center,
       //duration: Duration(milliseconds: 400),
-      width: 200,
-      height: 200,
+      width: 100,
+      height: 100,
       margin: EdgeInsets.only(top: 50),
       child:  Image(
         image: AssetImage('Assets/UsuarioCirculo.png'),
@@ -90,11 +95,10 @@ TextEditingController idController = new TextEditingController();
 TextEditingController passwordController = new TextEditingController();
 
 
-AnimatedContainer textoSeccion(){
-  return AnimatedContainer(
-    duration: Duration(milliseconds: 400),
+Container textoSeccion(){
+  return Container(
     padding: EdgeInsets.symmetric(horizontal: 30.0),
-    margin: EdgeInsets.only(top: 200),
+    margin: EdgeInsets.only(top: 70),
     child: Column(children: [
       txtID(" Email", 'Assets/Usuario.png'),
       SizedBox(height: 30.0),

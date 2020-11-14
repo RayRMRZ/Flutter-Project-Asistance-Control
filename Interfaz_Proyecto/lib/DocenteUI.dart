@@ -1,22 +1,23 @@
-import 'LoginUI.dart';
+import 'package:Interfaz_Proyecto/LoginUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+//import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
 
 
 
-class EstudiantePagina extends StatefulWidget{
+class DocentePagina extends StatefulWidget{
   @override
-  _EstudiantePagina createState() => _EstudiantePagina();
+  _DocentePagina createState() => _DocentePagina();
 }
 
 
 
-class _EstudiantePagina extends State<EstudiantePagina>{
+class _DocentePagina extends State<DocentePagina>{
   Widget build(BuildContext context){
     return Scaffold(
       drawer: Drawer(
         child: Container(
-          color: Color.fromRGBO(53, 62, 123, 1),
+          color: Color.fromRGBO(53, 132, 230, 1),
           child: ListView(
             physics: NeverScrollableScrollPhysics(),
             children: <Widget>[
@@ -32,8 +33,10 @@ class _EstudiantePagina extends State<EstudiantePagina>{
                   ),
                 ),
               ),
-              CustomListTile(Icons.calendar_today,"Ver Horarios", () => {print("Pulso la opcion de horarios")}),
-              CustomListTile(Icons.list_alt_rounded ,"Mis Asistencias", () => {/*FUNCION DE LO QUE HACE EL BOTON*/} ),
+              CustomListTile(Icons.calendar_today,"Horarios", () => {print("Pulso la opcion de horarios")}),
+              CustomListTile(Icons.list_alt_rounded ,"Ver Listas", () => {/*FUNCION DE LO QUE HACE EL BOTON*/} ),
+              CustomListTile(Icons.person_add ,"Registrar Alumnos", () => {/*FUNCION DE LO QUE HACE EL BOTON*/} ),
+              CustomListTile(Icons.picture_as_pdf_rounded,"Generar PDF's", () => {/*FUNCION DE LO QUE HACE EL BOTON*/} ),
               CustomListTile(Icons.settings ,"Configuración", () => {/*FUNCION DE LO QUE HACE EL BOTON*/} ),
               CustomListTile(Icons.sensor_door_rounded ,"Salir", () => {Navigator.push(context, MaterialPageRoute(builder: (context) => LoginForm()))} ),
             ],
@@ -49,21 +52,14 @@ class _EstudiantePagina extends State<EstudiantePagina>{
             color: Colors.white,
             
           ),
-          title: Text("Alumno", style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),),
+          title: Text("Docente", style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),),
           centerTitle: true,
-          backgroundColor: Color.fromRGBO(53, 132, 230, 1),
+          backgroundColor: Color.fromRGBO(53, 62, 123, 1),
         ),
       ),
 
-     // Seccion abajo del AppBar-------------------------------
-      body: Container(
-        child: ListView(
-          children: [
-            Text("Esto es un test"),
-            //seccionQRLector();
-          ],
-        ),
-      ),
+     // Seccion abajo del AppBar-----------------------------------------------------------------------
+    //body: 
     );
   }
 }
@@ -109,3 +105,9 @@ class CustomListTile extends StatelessWidget{ //utilizado para los botones del m
     );
   }
 }
+
+
+
+//************************************************************************************************************************* */
+
+
