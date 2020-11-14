@@ -50,6 +50,7 @@ String password=passwordController.text;
 
 Validation validation=new Validation();
 if(validation.isCorrect(email)){
+  msgValidation="";
   print('El correo: $email ===> es valido');
   if(await validation.exists(password)==true){  
 Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
