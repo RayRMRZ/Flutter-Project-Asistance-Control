@@ -1,4 +1,4 @@
-import 'file:///C:/Users/Gustavo%20Angel/Desktop/GitHub/Flutter-Project-Asistance-Control/Interfaz_Proyecto/backend/testValidator.dart';
+import 'package:Interfaz_Proyecto/backend/testValidator.dart';
 import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +50,7 @@ String password=passwordController.text;
 
 Validation validation=new Validation();
 if(validation.isCorrect(email)){
+  msgValidation="";
   print('El correo: $email ===> es valido');
   if(await validation.exists(password)==true){  
 Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
