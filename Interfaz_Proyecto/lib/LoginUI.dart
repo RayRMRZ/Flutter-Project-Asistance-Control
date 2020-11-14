@@ -14,19 +14,12 @@ class _LoginFormState extends State<LoginForm>{
 
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-          body: GestureDetector(
+    return GestureDetector(
           onTap: (){
-         
             FocusScopeNode currentFocus = FocusScope.of(context);
             if(!currentFocus.hasPrimaryFocus){
               currentFocus.unfocus();
               }
-                 Scaffold.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Email Invalido"),
-              )
-              );
             },
             child: Material(
               child: Container(
@@ -47,16 +40,15 @@ class _LoginFormState extends State<LoginForm>{
               ),
           ),
         ),
-      ),
-    );
-  }
+      );
+    }
 
 signIn() async {//-----------------------------codigo para verificar login------------------------------
 String email= idController.text; 
 
 Validation validation=new Validation();
 if(validation.isCorrect(email)){
-  print('El correo: ${email} ===> es valido');
+  print('El correo: $email ===> es valido');
 Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
     }
     
