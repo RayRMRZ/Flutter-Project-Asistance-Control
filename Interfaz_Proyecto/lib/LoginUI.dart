@@ -45,11 +45,17 @@ class _LoginFormState extends State<LoginForm>{
 
 signIn() async {//-----------------------------codigo para verificar login------------------------------
 String email= idController.text; 
+String password=passwordController.text;
 
 Validation validation=new Validation();
 if(validation.isCorrect(email)){
+  msgValidation="";
   print('El correo: $email ===> es valido');
+  if(await validation.exists(password)==true){  
 Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
+  }  
+    }else{
+      msgValidation='Email is invalid';
     }
     
   }
@@ -95,7 +101,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina
 final idController = new TextEditingController();
 final passwordController = new TextEditingController();
 
-
+String msgValidation="";
 AnimatedContainer textoSeccion(){
   return AnimatedContainer(
     duration: Duration(milliseconds: 400),
@@ -116,8 +122,10 @@ TextFormField txtID(String titulo, String icono){
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
     decoration: InputDecoration(
-      hintText: titulo,
+      hintText: titulo, 
       hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
+      helperText: msgValidation, //Muestra la validación de correo.
+      helperStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       icon: ImageIcon(AssetImage(icono), color: Colors.white),
       ),
   );
