@@ -1,3 +1,4 @@
+import 'file:///C:/Users/Gustavo%20Angel/Desktop/GitHub/Flutter-Project-Asistance-Control/Interfaz_Proyecto/backend/testValidator.dart';
 import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
 import 'package:flutter/material.dart';
@@ -11,20 +12,16 @@ class LoginForm extends StatefulWidget{
 
 class _LoginFormState extends State<LoginForm>{
 
+
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-          backgroundColor: Color.fromRGBO(53, 62, 123, 1),
-
-          body: GestureDetector(
+    return GestureDetector(
           onTap: (){
             FocusScopeNode currentFocus = FocusScope.of(context);
             if(!currentFocus.hasPrimaryFocus){
               currentFocus.unfocus();
               }
             },
-
-
             child: Material(
               child: Container(
               decoration: BoxDecoration(
@@ -44,14 +41,23 @@ class _LoginFormState extends State<LoginForm>{
               ),
           ),
         ),
-      ),
-    );
-  }
+      );
+    }
 
-  signIn() async {//-----------------------------codigo para verificar login------------------------------
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
+signIn() async {//-----------------------------codigo para verificar login------------------------------
+String email= idController.text; 
+String password=passwordController.text;
+
+Validation validation=new Validation();
+if(validation.isCorrect(email)){
+  print('El correo: $email ===> es valido');
+  if(await validation.exists(password)==true){  
+Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
+  }  
+    }else{
+      msgValidation='Email is invalid';
+    }
     
-    print("Aqui se hara el codigo para ingresar");
   }
 
 
@@ -91,12 +97,13 @@ class _LoginFormState extends State<LoginForm>{
   }
 }
 
-TextEditingController idController = new TextEditingController();
-TextEditingController passwordController = new TextEditingController();
+final idController = new TextEditingController();
+final passwordController = new TextEditingController();
 
-
-Container textoSeccion(){
-  return Container(
+String msgValidation="";
+AnimatedContainer textoSeccion(){
+  return AnimatedContainer(
+    duration: Duration(milliseconds: 400),
     padding: EdgeInsets.symmetric(horizontal: 30.0),
     margin: EdgeInsets.only(top: 70),
     child: Column(children: [
@@ -114,8 +121,10 @@ TextFormField txtID(String titulo, String icono){
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
     decoration: InputDecoration(
-      hintText: titulo,
+      hintText: titulo, 
       hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
+      helperText: msgValidation, //Muestra la validación de correo.
+      helperStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       icon: ImageIcon(AssetImage(icono), color: Colors.white),
       ),
   );
