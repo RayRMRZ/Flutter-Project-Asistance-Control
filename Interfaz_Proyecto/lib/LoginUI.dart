@@ -1,4 +1,4 @@
-//import 'EstudianteUI.dart';
+import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -49,7 +49,7 @@ class _LoginFormState extends State<LoginForm>{
   }
 
   signIn() async {//-----------------------------codigo para verificar login------------------------------
-    Navigator.push(context, MaterialPageRoute(builder: (context) => DocentePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
     
     print("Aqui se hara el codigo para ingresar");
   }
