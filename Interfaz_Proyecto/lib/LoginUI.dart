@@ -1,3 +1,4 @@
+import 'file:///C:/Users/Gustavo%20Angel/Desktop/GitHub/Flutter-Project-Asistance-Control/Interfaz_Proyecto/backend/testValidator.dart';
 import 'EstudianteUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,42 +11,55 @@ class LoginForm extends StatefulWidget{
 
 class _LoginFormState extends State<LoginForm>{
 
+
   @override
   Widget build(BuildContext context){
-    return GestureDetector(
-        onTap: (){
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if(!currentFocus.hasPrimaryFocus){
-            currentFocus.unfocus();
-            }
-          },
-          child: Material(
-            child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [const Color.fromRGBO(53, 132, 230, 1), Color.fromRGBO(53, 62, 123, 1)],
-                begin: FractionalOffset.topCenter,
-                end: FractionalOffset.bottomCenter,
-                stops: [0.0,1.0],
-                tileMode: TileMode.clamp
+    return Scaffold(
+          body: GestureDetector(
+          onTap: (){
+         
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if(!currentFocus.hasPrimaryFocus){
+              currentFocus.unfocus();
+              }
+                 Scaffold.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Email Invalido"),
+              )
+              );
+            },
+            child: Material(
+              child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: [const Color.fromRGBO(53, 132, 230, 1), Color.fromRGBO(53, 62, 123, 1)],
+                  begin: FractionalOffset.topCenter,
+                  end: FractionalOffset.bottomCenter,
+                  stops: [0.0,1.0],
+                  tileMode: TileMode.clamp
+                  ),
                 ),
+              child: ListView(
+                children: [
+                  logoSeccion(),
+                  textoSeccion(),
+                  botonSeccion(),
+                ],
               ),
-            child: ListView(
-              children: [
-                logoSeccion(),
-                textoSeccion(),
-                botonSeccion(),
-              ],
-            ),
+          ),
         ),
       ),
     );
   }
 
-  signIn() async {//-----------------------------codigo para verificar login------------------------------
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
+signIn() async {//-----------------------------codigo para verificar login------------------------------
+String email= idController.text; 
 
+Validation validation=new Validation();
+if(validation.isCorrect(email)){
+  print('El correo: ${email} ===> es valido');
+Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
+    }
     
-    print("Aqui se hara el codigo para ingresar");
   }
 
   Container botonSeccion(){
@@ -86,8 +100,8 @@ class _LoginFormState extends State<LoginForm>{
   }
 }
 
-TextEditingController idController = new TextEditingController();
-TextEditingController passwordController = new TextEditingController();
+final idController = new TextEditingController();
+final passwordController = new TextEditingController();
 
 
 AnimatedContainer textoSeccion(){
