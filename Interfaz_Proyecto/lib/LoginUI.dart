@@ -1,6 +1,6 @@
-import 'file:///C:/Users/Gustavo%20Angel/Desktop/GitHub/Flutter-Project-Asistance-Control/Interfaz_Proyecto/backend/testValidator.dart';
+import 'backend/testValidator.dart';
 import 'EstudianteUI.dart';
-import 'DocenteUI.dart';
+//import 'DocenteUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
