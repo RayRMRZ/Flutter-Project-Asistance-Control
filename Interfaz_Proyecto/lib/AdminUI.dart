@@ -57,7 +57,7 @@ class _AdminPagina extends State<AdminPagina>{
           ),
           title: Text("Administrador", style: TextStyle(color: Color.fromRGBO(53, 132, 230, 1),fontSize: 24, fontWeight: FontWeight.bold),),
           centerTitle: true,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))), 
           backgroundColor: Colors.white,
         ),
       ),
