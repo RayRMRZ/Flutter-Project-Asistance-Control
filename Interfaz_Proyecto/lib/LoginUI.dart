@@ -1,8 +1,10 @@
-import 'package:Interfaz_Proyecto/backend/testValidator.dart';
-import 'EstudianteUI.dart';
-import 'DocenteUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'backend/testValidator.dart';
+import 'EstudianteUI.dart';
+import 'DocenteUI.dart';
+import 'AdminUI.dart';
+
 
 class LoginForm extends StatefulWidget{
   @override
@@ -53,7 +55,9 @@ if(validation.isCorrect(email)){
   msgValidation="";
   print('El correo: $email ===> es valido');
   if(await validation.exists(password)==true){  
-Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
+    
+Navigator.push(context, MaterialPageRoute(builder: (context) => DocentePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
+ msgValidation="";
   }  
     }else{
       msgValidation='Email is invalid';
@@ -70,7 +74,10 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => EstudiantePagina
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: RaisedButton(
         onPressed: () {
-            signIn();
+          
+          signIn();
+          
+            
             },
             color: Colors.black26,
             shape: RoundedRectangleBorder(

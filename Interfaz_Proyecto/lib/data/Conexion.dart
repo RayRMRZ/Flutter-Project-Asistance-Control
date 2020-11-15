@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';   
 
+// ignore: camel_case_types
 class Conexion_http{
 int _flag=0;
 
