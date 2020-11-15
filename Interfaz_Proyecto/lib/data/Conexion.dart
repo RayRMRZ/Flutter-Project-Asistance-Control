@@ -15,15 +15,14 @@ int _flag=0;
     _flag = flag;
   }
 
-Future <String> getStatusCode(String password) async{  
+Future <String> getStatusCode(String email,String password) async{  
 Completer completer=Completer<String>();
 
-
-http.Response response= await http.get('https://jsonplaceholder.typicode.com/users/8');
+http.Response response= await http.get('https://jsonplaceholder.typicode.com/users/1');
 try{
   if(response.statusCode==200){
- 
-getDatatoCompare(response,password);
+    
+getDatatoCompare(response,email,password);
   
   completer.complete('Se ha realizado la petición http\n');
   
@@ -36,15 +35,21 @@ completer.completeError('Sin conexión a internet');
 return completer.future;
 }
 
-getDatatoCompare(var response,String password){
+getDatatoCompare(var response,String email,String password)async{
+
 Map<String,String> datos={
-'username':password,
+'email':email,
+'username':password
 };
+
 final jsonData=jsonDecode(response.body);
- if (jsonData['username']==datos['username']){
+
+ if ((jsonData['email']==datos['email']) && jsonData['username']==datos['username']){
     _flag=1;
+   print("Mapa1: ${jsonData['email']} es igual a Mapa 2: ${datos['email']}");
    print("Mapa1: ${jsonData['username']} es igual a Mapa 2: ${datos['username']}");
  }else{
+    print("Mapa1: ${jsonData['email']} no es igual a Mapa 2: ${datos['email']}");
    print("Mapa1: ${jsonData['username']} no es igual a Mapa 2: ${datos['username']}");
  }  
 }

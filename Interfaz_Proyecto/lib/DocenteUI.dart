@@ -1,13 +1,18 @@
 import 'package:Interfaz_Proyecto/LoginUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-//import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
+
+import 'package:flare_flutter/flare_actor.dart';
 
 
 
 class DocentePagina extends StatefulWidget{
+ final String email;
+ final String password;
+ DocentePagina(this.email,this.password);
   @override
   _DocentePagina createState() => _DocentePagina();
+  
 }
 
 
@@ -28,8 +33,8 @@ class _DocentePagina extends State<DocentePagina>{
                 Container(
                   height: 170,
                   child: UserAccountsDrawerHeader(
-                    accountName: Text("Raymundo Ramirez Alvarez"),  //Se tiene que adaptar a la info. del docente
-                    accountEmail: Text("ReymondARamirez@gmail.com"),  //Se tiene que adaptar a la info. del docente
+                    accountName: Text(widget.email),  //Se tiene que adaptar a la info. del docente
+                    accountEmail: Text(widget.password),  //Se tiene que adaptar a la info. del docente
                     
                     currentAccountPicture: CircleAvatar(
                       
@@ -57,15 +62,25 @@ class _DocentePagina extends State<DocentePagina>{
               color: Colors.white,
               
             ),
-            title: Text("Docente", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-            centerTitle: true,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(50))),
-            backgroundColor: Color.fromRGBO(53, 62, 123, 1),
+          title: Text("Docente", style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),),
+          centerTitle: true,
+          backgroundColor: Color.fromRGBO(53, 62, 123, 1),
           ),
+          
+          
         ),
 
      // Seccion abajo del AppBar-----------------------------------------------------------------------
     //body: 
+        body:ListView(children:<Widget>[
+          Container(height:350,
+          child:FlareActor("Assets/Qr loading.flr",animation:"camera",color:Color.fromRGBO(0, 0, 0, 0.8) ) //animation:(show|loading|camera|scanning)
+        
+          ),
+          Container(height:50,
+            child:FlareActor("Assets/wait.flr",animation: "loading",color: Color.fromRGBO(125,250, 200, 0.5),))
+        ]),
+
     );
   }
 }

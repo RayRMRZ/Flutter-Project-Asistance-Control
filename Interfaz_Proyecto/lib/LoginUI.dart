@@ -54,9 +54,9 @@ Validation validation=new Validation();
 if(validation.isCorrect(email)){
   msgValidation="";
   print('El correo: $email ===> es valido');
-  if(await validation.exists(password)==true){  
+  if(await validation.exists(email,password)==true){  
     
-Navigator.push(context, MaterialPageRoute(builder: (context) => DocentePagina()));  ////UNION CON LA PAGINA ESTUDIANTE
+Navigator.push(context, MaterialPageRoute(builder: (context) => DocentePagina(email,password)));  ////UNION CON LA PAGINA ESTUDIANTE
  msgValidation="";
   }  
     }else{
@@ -74,8 +74,10 @@ Navigator.push(context, MaterialPageRoute(builder: (context) => DocentePagina())
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: RaisedButton(
         onPressed: () {
+          setState((){
+            signIn();
+            });
           
-          signIn();
           
             
             },
@@ -125,10 +127,14 @@ AnimatedContainer textoSeccion(){
 //Los Metodos Utilizados en textSeccion() son:------------------------
 TextFormField txtID(String titulo, String icono){
   return TextFormField(
+    
     controller: idController,
+    
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
+    
     decoration: InputDecoration(
+      
       hintText: titulo, 
       hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       helperText: msgValidation, //Muestra la validación de correo.

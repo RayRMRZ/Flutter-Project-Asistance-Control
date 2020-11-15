@@ -18,9 +18,10 @@ if ((regExp.hasMatch(email))) {
 return _;
 }
 
-Future<bool> exists(String password) async {
-var cnx = await conexion_http.getStatusCode( password);
+Future<bool> exists(String email,String password) async {
+var cnx = await conexion_http.getStatusCode(email, password);
 print("Status Code: $cnx");
+print('Entró al validador: ${conexion_http.flag}');
 if(conexion_http.flag==1){
 return true;
 }else{
