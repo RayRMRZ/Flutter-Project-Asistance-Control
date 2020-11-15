@@ -19,7 +19,7 @@ return _;
 
 Future<bool> exists(String password) async {
 var cnx = await conexion_http.getStatusCode( password);
-print("Estado flag: ${conexion_http.flag}");
+print("Estado flag: $cnx");
 if(conexion_http.flag==1){
 return true;
 }else{
