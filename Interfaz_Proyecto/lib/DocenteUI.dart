@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:flare_flutter/flare_actor.dart';
-
+import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/services.dart';
 
 
 class DocentePagina extends StatefulWidget{
  final String email;
  final String password;
+ 
  DocentePagina(this.email,this.password);
+
   @override
   _DocentePagina createState() => _DocentePagina();
   
@@ -18,6 +21,37 @@ class DocentePagina extends StatefulWidget{
 
 
 class _DocentePagina extends State<DocentePagina>{
+
+var result="Pasar lista 🤠👌";
+Future _scanQR()async{
+try{
+  var qrResult= await BarcodeScanner.scan();
+  setState(() {
+    result = qrResult.toString();
+  });
+}on PlatformException catch(e){
+  if(e.code==BarcodeScanner.CameraAccessDenied){
+    
+    setState(() {
+      result="El permiso de la cámara fue denegado";
+    });
+
+  }else{
+    setState(() {
+      result="Unknown Error$e";
+    });
+  }
+}on FormatException{
+  setState(() {
+    result="Presionaste el boton antes de escanearse algo";
+  });
+}catch(e){
+   setState(() {
+      result="Unknown Error$e";
+    });
+}
+}
+
   Widget build(BuildContext context){
     return Scaffold(
       drawer: ClipRRect(
@@ -72,18 +106,42 @@ class _DocentePagina extends State<DocentePagina>{
 
      // Seccion abajo del AppBar-----------------------------------------------------------------------
     //body: 
-        body:ListView(children:<Widget>[
-          Container(height:350,
-          child:FlareActor("Assets/Qr loading.flr",animation:"camera",color:Color.fromRGBO(0, 0, 0, 0.8) ) //animation:(show|loading|camera|scanning)
-        
-          ),
+        body: ListView(
+          children:<Widget>[
+          Container(
+          margin:EdgeInsets.only(top:60.0, left:10.0, right:10.0),
+          height:300,
+          child:FlareActor("Assets/Qr loading.flr",
+          animation:"scanning",
+          color:Color.fromRGBO(0, 0, 0, 0.8), ) //animation:(show|loading|camera|scanning)
+        ),
           Container(height:50,
-            child:FlareActor("Assets/wait.flr",animation: "loading",color: Color.fromRGBO(125,250, 200, 0.5),))
+            child:FlareActor("Assets/wait.flr",
+            animation: "loading",
+            color: Color.fromRGBO(100,210, 200, 0.8),)),
+           Container(
+             padding: EdgeInsets.symmetric(horizontal: 35.0,vertical: 50.0),
+             child: RaisedButton(child: Text(
+               result,
+               style:TextStyle(
+                 fontSize: 18
+               )
+             ),
+             onPressed: _scanQR,
+             padding: EdgeInsets.symmetric(vertical:30,horizontal:10),
+             color: Colors.white54,
+             shape: RoundedRectangleBorder(
+               borderRadius: BorderRadius.circular(20)
+             ),
+             ),
+           )
         ]),
 
     );
   }
 }
+
+
 
 
 // ignore: must_be_immutable

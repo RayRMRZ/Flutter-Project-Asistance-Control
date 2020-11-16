@@ -56,7 +56,7 @@ if(validation.isCorrect(email)){
   print('El correo: $email ===> es valido');
   if(await validation.exists(email,password)==true){  
     
-Navigator.push(context, MaterialPageRoute(builder: (context) => DocentePagina(email,password)));  ////UNION CON LA PAGINA ESTUDIANTE
+Navigator.push(context, MaterialPageRoute(builder: (context) =>/* EstudiantePagina()*/DocentePagina(email,password)));  ////UNION CON LA PAGINA ESTUDIANTE
  msgValidation="";
   }  
     }else{
