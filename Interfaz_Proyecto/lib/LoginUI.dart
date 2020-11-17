@@ -1,9 +1,14 @@
+
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'backend/testValidator.dart';
 import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
 import 'AdminUI.dart';
+
+//Sincere@april.biz
+//Bret
 
 class LoginForm extends StatefulWidget {
   @override
@@ -57,9 +62,13 @@ class _LoginFormState extends State<LoginForm> {
       if (await validation.exists(email, password) == true) {
         Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => /* EstudiantePagina()*/ DocentePagina(
-                    email, password))); ////UNION CON LA PAGINA ESTUDIANTE
+            MaterialPageRoute(//*******************************************************CAMBIO DE PAGINAS RAPIDO***************************************************** */
+                builder: (context) => 
+                //EstudiantePagina())); 
+                //AdminPagina()));
+               DocentePagina(email, password)));
+
+
         msgValidation = "";
       }
     } else {
@@ -90,26 +99,26 @@ class _LoginFormState extends State<LoginForm> {
 
   Container logoSeccion() {
     return Container(
-        alignment: Alignment.center,
+        //alignment: Alignment.center,
         //duration: Duration(milliseconds: 400),
-        width: 100,
-        height: 100,
-        margin: EdgeInsets.only(top: 50),
-        child: Image(
-          image: AssetImage('Assets/UsuarioCirculo.png'),
-        ));
+        width: w,
+        height: h,
+        margin: EdgeInsets.only(top: 60),
+        child: FlareActor('Assets/login.flr',animation: "Loading",
+             color: Color.fromRGBO(100, 210, 200, 0.8),),
+        );
   }
-}
+} 
 
 final idController = new TextEditingController();
 final passwordController = new TextEditingController();
-
 String msgValidation = "";
+
 AnimatedContainer textoSeccion() {
   return AnimatedContainer(
       duration: Duration(milliseconds: 400),
       padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.only(top: 70),
+      margin: EdgeInsets.only(top: tp),//top: 0
       child: Column(
         children: [
           txtID(" Email", 'Assets/Usuario.png'),
@@ -118,12 +127,13 @@ AnimatedContainer textoSeccion() {
         ],
       ));
 }
-
+double tp=0,w=100,h=350;
 //Los Metodos Utilizados en textSeccion() son:------------------------
 TextFormField txtID(String titulo, String icono) {
   return TextFormField(
     controller: idController,
-
+    onTap: (){
+      tp=0; w=100; h=200;},
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
 
@@ -141,6 +151,7 @@ TextFormField txtPassword(String titulo, String icono) {
   return TextFormField(
     controller: passwordController,
     obscureText: true,
+    onTap: (){tp=50; w=100; h=300;},
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
     decoration: InputDecoration(

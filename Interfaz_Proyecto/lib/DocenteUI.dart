@@ -1,7 +1,6 @@
 import 'package:Interfaz_Proyecto/LoginUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +16,8 @@ class DocentePagina extends StatefulWidget {
 }
 
 class _DocentePagina extends State<DocentePagina> {
-  var result = "Pasar lista";
+  var result = "Pasar Lista";
+
   Future _scanQR() async {
     try {
       var qrResult = await BarcodeScanner.scan();
@@ -36,7 +36,7 @@ class _DocentePagina extends State<DocentePagina> {
       }
     } on FormatException {
       setState(() {
-        result = "Presionaste el boton antes de escanearse algo";
+        result = "Presionaste el boton antes de escanear algo";
       });
     } catch (e) {
       setState(() {
@@ -105,6 +105,9 @@ class _DocentePagina extends State<DocentePagina> {
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
+          shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.only(bottomRight: Radius.circular(50))),
           backgroundColor: Color.fromRGBO(53, 62, 123, 1),
         ),
       ),
@@ -113,32 +116,35 @@ class _DocentePagina extends State<DocentePagina> {
       //body:
       body: ListView(children: <Widget>[
         Container(
-            margin: EdgeInsets.only(top: 60.0, left: 10.0, right: 10.0),
-            height: 300,
+            margin: EdgeInsets.only(top: 60.0, left: 10.0, right: 10.0, bottom: 20),
+            height: 180,
             child: FlareActor(
               "Assets/Qr loading.flr",
-              animation: "show",
-              color: Color.fromRGBO(0, 0, 0, 1),
+              animation: "scanning",
+              color: Color.fromRGBO(53, 62, 123, 1),
             ) //animation:(show|loading|camera|scanning)
             ),
         Container(
-            height: 50,
+            height: 30,
             child: FlareActor(
               "Assets/wait.flr",
               animation: "loading",
-              color: Color.fromRGBO(65, 21, 200, 0.8),
+              color: Color.fromRGBO(100, 210, 200, 0.8),
             )),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 35.0, vertical: 50.0),
+          padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 50.0),
           child: OutlineButton(
-            child: Text(result, style: TextStyle(fontFamily:"Nunito", fontSize: 18 )),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Text(result, style: TextStyle(fontSize: 18 )),
+            ),
             onPressed: _scanQR,
             padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
             color: Colors.white54,
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           ),
-        )
+        ),
       ]),
     );
   }

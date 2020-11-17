@@ -22,7 +22,7 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                   height: 170,
                   child: UserAccountsDrawerHeader(
                     accountName: Text(
-                        "Raymundo Ramirez Alvarez"), //Se tiene que adaptar a la info. del docente
+                        "Raymundo Ramirez Alvarez",), //Se tiene que adaptar a la info. del docente
                     accountEmail: Text(
                         "ReymondARamirez@gmail.com"), //Se tiene que adaptar a la info. del docente
 
@@ -56,6 +56,7 @@ class _EstudiantePagina extends State<EstudiantePagina> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: AppBar(
+
           iconTheme: IconThemeData(
             color: Colors.white,
           ),
