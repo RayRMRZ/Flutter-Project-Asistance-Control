@@ -8,7 +8,6 @@ import 'AdminUI.dart';
 //Sincere@april.biz
 //Bret
 
-
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -18,7 +17,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
@@ -61,11 +60,13 @@ class _LoginFormState extends State<LoginForm> {
       if (await validation.exists(email, password) == true) {
         Navigator.push(
             context,
-            MaterialPageRoute(
+            MaterialPageRoute(//*******************************************************CAMBIO DE PAGINAS RAPIDO***************************************************** */
                 builder: (context) => 
                 //EstudiantePagina())); 
-                AdminPagina()));
-                //DocentePagina(email, password)));
+                //AdminPagina()));
+                DocentePagina(email, password)));
+
+
         msgValidation = "";
       }
     } else {

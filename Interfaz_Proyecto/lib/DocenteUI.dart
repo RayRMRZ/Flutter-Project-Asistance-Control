@@ -17,6 +17,7 @@ class DocentePagina extends StatefulWidget {
 
 class _DocentePagina extends State<DocentePagina> {
   var result = "Pasar Lista";
+
   Future _scanQR() async {
     try {
       var qrResult = await BarcodeScanner.scan();

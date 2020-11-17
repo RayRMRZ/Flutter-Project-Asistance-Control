@@ -25,6 +25,7 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                         "Raymundo Ramirez Alvarez",), //Se tiene que adaptar a la info. del docente
                     accountEmail: Text(
                         "ReymondARamirez@gmail.com"), //Se tiene que adaptar a la info. del docente
+
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: AssetImage(
                           "Assets/Usuario.png"), //Se tiene que adaptar a la info. del docente
@@ -55,7 +56,10 @@ class _EstudiantePagina extends State<EstudiantePagina> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: AppBar(
-          iconTheme: IconThemeData(color: Colors.white,),
+
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
           title: Text(
             "Alumno",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
