@@ -18,11 +18,12 @@ class Conexion_http {
     Completer completer = Completer<String>();
 
     http.Response response =
-        await http.get('https://jsonplaceholder.typicode.com/users/1');
+        await http.get('https://credencia.herokuapp.com/docentes/5fb3622697dd5300175c741b');
+        
     try {
       if (response.statusCode == 200) {
         getDatatoCompare(response, email, password);
-
+        print(response.body);
         completer.complete('Se ha realizado la petición http\n');
       } else {
         completer.completeError('Error de servidor');
@@ -34,21 +35,22 @@ class Conexion_http {
   }
 
   getDatatoCompare(var response, String email, String password) async {
-    Map<String, String> datos = {'email': email, 'username': password};
+    
+    Map<String, String> datos = {'email': email, 'area': password};
 
     final jsonData = jsonDecode(response.body);
 
     if ((jsonData['email'] == datos['email']) &&
-        jsonData['username'] == datos['username']) {
+        jsonData['area'] == datos['area']) {
       _flag = 1;
       print("Mapa1: ${jsonData['email']} es igual a Mapa 2: ${datos['email']}");
       print(
-          "Mapa1: ${jsonData['username']} es igual a Mapa 2: ${datos['username']}");
+          "Mapa1: ${jsonData['area']} es igual a Mapa 2: ${datos['area']}");
     } else {
       print(
           "Mapa1: ${jsonData['email']} no es igual a Mapa 2: ${datos['email']}");
       print(
-          "Mapa1: ${jsonData['username']} no es igual a Mapa 2: ${datos['username']}");
+          "Mapa1: ${jsonData['area']} no es igual a Mapa 2: ${datos['area']}");
     }
   }
 }
