@@ -5,6 +5,10 @@ import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
 import 'AdminUI.dart';
 
+//Sincere@april.biz
+//Bret
+
+
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -14,7 +18,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: (){
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
@@ -58,8 +62,10 @@ class _LoginFormState extends State<LoginForm> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => /* EstudiantePagina()*/ DocentePagina(
-                    email, password))); ////UNION CON LA PAGINA ESTUDIANTE
+                builder: (context) => 
+                //EstudiantePagina())); 
+                AdminPagina()));
+                //DocentePagina(email, password)));
         msgValidation = "";
       }
     } else {
@@ -103,8 +109,8 @@ class _LoginFormState extends State<LoginForm> {
 
 final idController = new TextEditingController();
 final passwordController = new TextEditingController();
-
 String msgValidation = "";
+
 AnimatedContainer textoSeccion() {
   return AnimatedContainer(
       duration: Duration(milliseconds: 400),

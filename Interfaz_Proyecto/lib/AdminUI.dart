@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'AddAlumnoUI.dart';
+import 'AddDocenteUI.dart';
+import 'AddMateriaUI.dart';
 import 'LoginUI.dart';
 
 class AdminPagina extends StatefulWidget {
@@ -91,6 +93,7 @@ class _AdminPagina extends State<AdminPagina> {
             child: ListView(
               children: [
                 logoSeccion(),
+                botonesSeccion(),
               ],
             ),
           ),
@@ -110,6 +113,48 @@ class _AdminPagina extends State<AdminPagina> {
           image: AssetImage('Assets/Corbata.png'),
         ));
   } //logoSeccion
+
+    Container botonesSeccion() {
+    return Container(
+      width: 150,
+      height: 300,
+      margin: EdgeInsets.only(top: 80),
+      child: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: ClipRRect(
+            borderRadius: BorderRadius.circular(200),
+            child: FlatButton(
+                onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => AddAlumnoPagina()));},
+                child: Text("Agregar Alumno", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: ClipRRect(
+            borderRadius: BorderRadius.circular(200),
+            child: FlatButton(
+                onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => AddDocentePagina()));},
+                child: Text("Agregar Docente", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: ClipRRect(
+            borderRadius: BorderRadius.circular(200),
+            child: FlatButton(
+                onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => AddMateriaPagina()));},
+                child: Text("Agregar Materia", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+              ),
+            ),
+          ),
+        ],
+      )
+    );
+  }
 }
 //-----------------------------------------------------------------
 

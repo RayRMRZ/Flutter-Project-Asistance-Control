@@ -10,7 +10,6 @@ class MiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginForm(),
-    );
+      home: LoginForm(),);
   }
 }
