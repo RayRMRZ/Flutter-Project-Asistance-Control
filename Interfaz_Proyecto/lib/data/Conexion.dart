@@ -47,8 +47,7 @@ class Conexion_http {
       print(
           "Mapa1: ${jsonData['area']} es igual a Mapa 2: ${datos['area']}");
     } else {
-      print(
-          "Mapa1: ${jsonData['email']} no es igual a Mapa 2: ${datos['email']}");
+      print("Mapa1: ${jsonData['email']} no es igual a Mapa 2: ${datos['email']}");
       print(
           "Mapa1: ${jsonData['area']} no es igual a Mapa 2: ${datos['area']}");
     }
