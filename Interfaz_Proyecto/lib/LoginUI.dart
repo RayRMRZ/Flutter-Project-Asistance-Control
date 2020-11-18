@@ -127,7 +127,7 @@ AnimatedContainer textoSeccion() {
         ],
       ));
 }
-double tp=0,w=100,h=350;
+double tp=0,w=100,h=350;//Variables de modificación texto y boton sección.
 //Los Metodos Utilizados en textSeccion() son:------------------------
 TextFormField txtID(String titulo, String icono) {
   return TextFormField(
