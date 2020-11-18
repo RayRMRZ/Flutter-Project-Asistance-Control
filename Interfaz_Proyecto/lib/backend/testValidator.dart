@@ -18,14 +18,22 @@ class Validation {
     return _;
   }
 
-  Future<bool> exists(String email, String password) async {
+  Future<int> exists(String email, String password,String tabla) async {
+    conexion_http.getUrl(tabla);
     var cnx = await conexion_http.getStatusCode(email, password);
+
     print("Status Code: $cnx");
     print('Entró al validador: ${conexion_http.flag}');
-    if (conexion_http.flag == 1) {
-      return true;
-    } else {
-      return false;
-    }
+   return codeVerification();
   }
+
+  int codeVerification(){
+   int code;
+    switch(conexion_http.flag){
+      case 1: code=1; break;
+      case 2: code=2; break;
+      case 3: code=3; break;}
+    return code;
+  }
+
 }
