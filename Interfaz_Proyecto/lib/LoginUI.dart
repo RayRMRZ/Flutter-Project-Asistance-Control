@@ -97,15 +97,26 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  Container logoSeccion() {
-    return Container(
-        //alignment: Alignment.center,
-        //duration: Duration(milliseconds: 400),
-        width: w,
-        height: h,
-        margin: EdgeInsets.only(top: 60),
-        child: FlareActor('Assets/login.flr',animation: "Loading",
-             color: Color.fromRGBO(100, 210, 200, 0.8),),
+  AnimatedContainer logoSeccion() {
+    return AnimatedContainer(
+        curve: Curves.easeInOutBack,
+        duration: Duration(milliseconds: 400),
+        margin: EdgeInsets.only(top: tp),
+        child: Column(
+          children: [
+            AnimatedContainer(
+              curve: Curves.easeInOutBack,
+              duration: Duration(milliseconds: 400),
+              height: h,
+              child: Image(image: AssetImage('Assets/Check In Logo.png'))),
+            AnimatedContainer(
+              curve: Curves.easeInOutBack,
+              duration: Duration(milliseconds: 500),
+              height: h/3,
+              margin: EdgeInsets.only(top: tp/3),
+              child: Image(image: AssetImage('Assets/Check In Box.png'))),
+          ],
+        ),
         );
   }
 } 
@@ -114,26 +125,32 @@ final idController = new TextEditingController();
 final passwordController = new TextEditingController();
 String msgValidation = "";
 
-AnimatedContainer textoSeccion() {
-  return AnimatedContainer(
-      duration: Duration(milliseconds: 400),
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
-      margin: EdgeInsets.only(top: tp),//top: 0
-      child: Column(
-        children: [
-          txtID(" Email", 'Assets/Usuario.png'),
-          SizedBox(height: 30.0),
-          txtPassword(" Password", 'Assets/Llave.png'),
-        ],
-      ));
+Focus textoSeccion() {
+  return Focus(
+      onFocusChange: (hasFocus){
+        if(hasFocus){
+          tp=20; h=100;}else{
+            tp=60; h=200;
+          }},
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 400),
+        curve: Curves.easeInOutBack,
+        padding: EdgeInsets.symmetric(horizontal: 40.0),
+        margin: EdgeInsets.only(top: tp),//top: 0
+        child: Column(
+          children: [
+            txtEmail(" Email", 'Assets/Usuario.png'),
+            SizedBox(height: 20.0),
+            txtPassword(" Password", 'Assets/Llave.png'),
+          ],
+        )),
+  );
 }
-double tp=0,w=100,h=350;//Variables de modificación texto y boton sección.
+double tp=60,h=200;//Variables de modificación texto y boton sección.
 //Los Metodos Utilizados en textSeccion() son:------------------------
-TextFormField txtID(String titulo, String icono) {
+TextFormField txtEmail(String titulo, String icono) {
   return TextFormField(
     controller: idController,
-    onTap: (){
-      tp=0; w=100; h=200;},
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
 
@@ -151,7 +168,6 @@ TextFormField txtPassword(String titulo, String icono) {
   return TextFormField(
     controller: passwordController,
     obscureText: true,
-    onTap: (){tp=50; w=100; h=300;},
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
     decoration: InputDecoration(
