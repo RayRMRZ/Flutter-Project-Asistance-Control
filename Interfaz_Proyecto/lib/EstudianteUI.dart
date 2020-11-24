@@ -1,6 +1,8 @@
 import 'LoginUI.dart';
+import 'package:Interfaz_Proyecto/backend/classes/Usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class EstudiantePagina extends StatefulWidget {
   @override
@@ -8,6 +10,7 @@ class EstudiantePagina extends StatefulWidget {
 }
 
 class _EstudiantePagina extends State<EstudiantePagina> {
+  User user = new User();
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: ClipRRect(
@@ -22,7 +25,8 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                   height: 170,
                   child: UserAccountsDrawerHeader(
                     accountName: Text(
-                        "Raymundo Ramirez Alvarez",), //Se tiene que adaptar a la info. del docente
+                      "Raymundo Ramirez Alvarez",
+                    ), //Se tiene que adaptar a la info. del docente
                     accountEmail: Text(
                         "ReymondARamirez@gmail.com"), //Se tiene que adaptar a la info. del docente
 
@@ -56,7 +60,6 @@ class _EstudiantePagina extends State<EstudiantePagina> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: AppBar(
-
           iconTheme: IconThemeData(
             color: Colors.white,
           ),
@@ -73,10 +76,17 @@ class _EstudiantePagina extends State<EstudiantePagina> {
       ),
 
       // Seccion abajo del AppBar-------------------------------
+      // ignore: todo
+      //TODO: cambiar texto por ID de usuario.
+
       body: Container(
         child: ListView(
           children: [
-            Text("Esto es un test"),
+            Center(
+                child: QrImage(
+                    data: 'Pasaste lista al usuario 18361039',
+                    version: QrVersions.auto,
+                    size: 320))
             //seccionQRLector();
           ],
         ),

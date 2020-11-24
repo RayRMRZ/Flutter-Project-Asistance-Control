@@ -1,11 +1,11 @@
-
-import 'package:flare_flutter/flare_actor.dart';
+//import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:Interfaz_Proyecto/backend/windowsControl.dart';
 import 'package:flutter/rendering.dart';
 import 'backend/testValidator.dart';
 import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
-import 'AdminUI.dart';
+//import 'AdminUI.dart';
 
 //Sincere@april.biz
 //Bret
@@ -55,24 +55,30 @@ class _LoginFormState extends State<LoginForm> {
     String email = idController.text;
     String password = passwordController.text;
 
+    Control control = new Control();
     Validation validation = new Validation();
+
+    print('El correo es de la tabla: ${control.inicio(email)}');
     if (validation.isCorrect(email)) {
-      msgValidation = "";
       print('El correo: $email ===> es valido');
-      if (await validation.exists(email, password) == true) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(//*******************************************************CAMBIO DE PAGINAS RAPIDO***************************************************** */
-                builder: (context) => 
-                //EstudiantePagina())); 
-                //AdminPagina()));
-               DocentePagina(email, password)));
 
-
-        msgValidation = "";
+      if (await validation.exists(email, password, control.inicio(email))) {
+        if (control.pagDoc == true) {
+          helperEmail = "";
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DocentePagina(email, password)));
+        } else {
+          helperEmail = "";
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => EstudiantePagina()));
+        }
+      } else {
+        //Aqui iría el AlertDialog//
       }
     } else {
-      msgValidation = 'Email is invalid';
+      helperEmail = 'El correo es inválido';
     }
   }
 
@@ -92,51 +98,55 @@ class _LoginFormState extends State<LoginForm> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50.0),
         ),
-        child: Text("Ingresar", style: TextStyle(color: Colors.white)),
+        child: Text('Ingresar', style: TextStyle(color: Colors.white)),
       ),
     );
   }
 
   AnimatedContainer logoSeccion() {
     return AnimatedContainer(
-        curve: Curves.easeInOutBack,
-        duration: Duration(milliseconds: 400),
-        margin: EdgeInsets.only(top: tp),
-        child: Column(
-          children: [
-            AnimatedContainer(
+      curve: Curves.easeInOutBack,
+      duration: Duration(milliseconds: 400),
+      margin: EdgeInsets.only(top: tp),
+      child: Column(
+        children: [
+          AnimatedContainer(
               curve: Curves.easeInOutBack,
               duration: Duration(milliseconds: 400),
               height: h,
               child: Image(image: AssetImage('Assets/Check In Logo.png'))),
-            AnimatedContainer(
+          AnimatedContainer(
               curve: Curves.easeInOutBack,
               duration: Duration(milliseconds: 500),
-              height: h/3,
-              margin: EdgeInsets.only(top: tp/3),
+              height: h / 3,
+              margin: EdgeInsets.only(top: tp / 3),
               child: Image(image: AssetImage('Assets/Check In Box.png'))),
-          ],
-        ),
-        );
+        ],
+      ),
+    );
   }
-} 
+}
 
 final idController = new TextEditingController();
 final passwordController = new TextEditingController();
-String msgValidation = "";
+String msgValidation = "", helperEmail = "";
 
 Focus textoSeccion() {
   return Focus(
-      onFocusChange: (hasFocus){
-        if(hasFocus){
-          tp=20; h=100;}else{
-            tp=60; h=200;
-          }},
-      child: AnimatedContainer(
+    onFocusChange: (hasFocus) {
+      if (hasFocus) {
+        tp = 20;
+        h = 100;
+      } else {
+        tp = 60;
+        h = 200;
+      }
+    },
+    child: AnimatedContainer(
         duration: Duration(milliseconds: 400),
         curve: Curves.easeInOutBack,
         padding: EdgeInsets.symmetric(horizontal: 40.0),
-        margin: EdgeInsets.only(top: tp),//top: 0
+        margin: EdgeInsets.only(top: tp), //top: 0
         child: Column(
           children: [
             txtEmail(" Email", 'Assets/Usuario.png'),
@@ -146,7 +156,8 @@ Focus textoSeccion() {
         )),
   );
 }
-double tp=60,h=200;//Variables de modificación texto y boton sección.
+
+double tp = 60, h = 200; //Variables de modificación texto y boton sección.
 //Los Metodos Utilizados en textSeccion() son:------------------------
 TextFormField txtEmail(String titulo, String icono) {
   return TextFormField(
@@ -157,7 +168,7 @@ TextFormField txtEmail(String titulo, String icono) {
     decoration: InputDecoration(
       hintText: titulo,
       hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
-      helperText: msgValidation, //Muestra la validación de correo.
+      helperText: helperEmail, //Muestra la validación de correo.
       helperStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       icon: ImageIcon(AssetImage(icono), color: Colors.white),
     ),
