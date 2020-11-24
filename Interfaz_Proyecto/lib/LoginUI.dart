@@ -168,6 +168,7 @@ TextFormField txtPassword(String titulo, String icono) {
   return TextFormField(
     controller: passwordController,
     obscureText: true,
+    //onTap: (){tp=50; w=100; h=300;},
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
     decoration: InputDecoration(
