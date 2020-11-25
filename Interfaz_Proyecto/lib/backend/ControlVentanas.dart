@@ -1,7 +1,3 @@
-
-
-
-
 class Control{
 
 bool _pagEst =false;

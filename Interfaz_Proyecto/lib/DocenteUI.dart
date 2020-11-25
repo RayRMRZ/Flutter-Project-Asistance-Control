@@ -1,4 +1,5 @@
 import 'package:Interfaz_Proyecto/LoginUI.dart';
+import 'package:Interfaz_Proyecto/backend/classes/DataDocente.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -6,15 +7,12 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 
 class DocentePagina extends StatefulWidget {
-  final String email;
-  final String password;
-
-  DocentePagina(this.email, this.password);
+  final String response;
+  DocentePagina(this.response);
 
   @override
   _DocentePagina createState() => _DocentePagina();
 }
-
 class _DocentePagina extends State<DocentePagina> {
   var result = "Pasar Lista";
 
@@ -46,6 +44,7 @@ class _DocentePagina extends State<DocentePagina> {
   }
 
   Widget build(BuildContext context) {
+    DataDocente docente=new DataDocente(widget.response);
     return Scaffold(
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(bottomRight: Radius.circular(120)),
@@ -58,10 +57,8 @@ class _DocentePagina extends State<DocentePagina> {
                 Container(
                   height: 170,
                   child: UserAccountsDrawerHeader(
-                    accountName: Text(widget
-                        .email), //Se tiene que adaptar a la info. del docente
-                    accountEmail: Text(widget
-                        .password), //Se tiene que adaptar a la info. del docente
+                    accountName: Text(docente.nombre), //Se tiene que adaptar a la info. del docente
+                    accountEmail: Text(docente.email), //Se tiene que adaptar a la info. del docente
 
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: AssetImage(

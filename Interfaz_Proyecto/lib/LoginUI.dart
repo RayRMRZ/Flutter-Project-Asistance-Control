@@ -1,14 +1,10 @@
-//import 'package:flare_flutter/flare_actor.dart';
+import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:flutter/material.dart';
-import 'package:Interfaz_Proyecto/backend/windowsControl.dart';
 import 'package:flutter/rendering.dart';
-import 'backend/testValidator.dart';
+import 'backend/Validacion.dart';
 import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
 //import 'AdminUI.dart';
-
-//Sincere@april.biz
-//Bret
 
 class LoginForm extends StatefulWidget {
   @override
@@ -62,17 +58,15 @@ class _LoginFormState extends State<LoginForm> {
     if (validation.isCorrect(email)) {
       print('El correo: $email ===> es valido');
 
-      if (await validation.exists(email, password, control.inicio(email))) {
+      if (await validation.exists(email, password,control)) {
         if (control.pagDoc == true) {
           helperEmail = "";
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DocentePagina(email, password)));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => DocentePagina(validation.sendResponse())));
         } else {
           helperEmail = "";
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => EstudiantePagina()));
+              MaterialPageRoute(builder: (context) => EstudiantePagina(validation.sendResponse())));
         }
       } else {
         //Aqui iría el AlertDialog//
