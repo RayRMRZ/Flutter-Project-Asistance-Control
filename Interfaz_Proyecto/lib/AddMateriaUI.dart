@@ -62,7 +62,7 @@ Padding txtInput(String campo, TextEditingController controlador){
     child: Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(40), bottomRight: Radius.circular(40)), 
+        borderRadius: BorderRadius.circular(40), 
         color: Color.fromRGBO(53, 62, 123, 0.1),
       ),
       child: Padding(

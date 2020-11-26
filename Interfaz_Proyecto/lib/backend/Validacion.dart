@@ -1,3 +1,4 @@
+import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:Interfaz_Proyecto/data/Conexion.dart';
 
 class Validation {
@@ -18,14 +19,22 @@ class Validation {
     return _;
   }
 
-  Future<bool> exists(String email, String password) async {
-    var cnx = await conexion_http.getStatusCode(email, password);
+  Future<bool> exists(String email, String password, Control control) async {
+    var cnx = await conexion_http.getStatusCode(email, password, control);
     print("Status Code: $cnx");
     print('Entró al validador: ${conexion_http.flag}');
+    return codeVerification();
+  }
+
+  bool codeVerification() {
     if (conexion_http.flag == 1) {
       return true;
     } else {
       return false;
     }
+  }
+  String sendResponse(){
+    print('Ets: ${conexion_http.respuesta} ');
+    return conexion_http.respuesta;
   }
 }

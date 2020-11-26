@@ -1,43 +1,39 @@
+import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'dart:convert';
 
 // ignore: camel_case_types
 class Conexion_http {
+
   int _flag = 0;
-
-  // ignore: unnecessary_getters_setters
   int get flag => _flag;
+  String _respuesta;
+  String get respuesta => _respuesta;
 
-  // ignore: unnecessary_getters_setters
-  set flag(int flag) {
-    _flag = flag;
-  }
-
-  Future<String> getStatusCode(String email, String password) async {
+  Future<String> getStatusCode(
+      String email, String password, Control control) async {
     Completer completer = Completer<String>();
     try {
-      final http.Response response = await http.post('https://credencia.herokuapp.com/auth/local', 
-      body: {
-        'identifier': email,
-        'password': password
-      // ignore: missing_return
-      }).then((response) {
-        print('Código recibido: ${response.statusCode}');
-        if (response.statusCode == 200) {
-          getDatatoCompare(response);
-          completer.complete('Se ha realizado la petición http\n');
-        } else {
-            completer.completeError('Ocurrió un error con la petición!');
-        }
-      });
+      final http.Response resp = await http.post(
+          'https://credencia.herokuapp.com/auth/local',
+          body: {'identifier': email, 'password': password});
+
+      if (resp.statusCode == 200) {
+        getDatatoCompare();
+        _respuesta=resp.body;
+        completer.complete('Se ha realizado la petición http\n');
+      } else {
+        completer.completeError(
+            'Ocurrió un error con la petición! ${resp.statusCode}');
+      }
     } catch (e) {
       completer.completeError('Sin conexión a internet');
     }
     return completer.future;
   }
 
-  getDatatoCompare(var response) async {
+  getDatatoCompare() async {
     _flag = 1;
   }
+
 }

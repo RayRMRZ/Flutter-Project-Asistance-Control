@@ -1,14 +1,21 @@
+import 'package:Interfaz_Proyecto/backend/classes/DataAlumno.dart';
+
 import 'LoginUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class EstudiantePagina extends StatefulWidget {
+  final String response;
+  EstudiantePagina(this.response);
+
   @override
   _EstudiantePagina createState() => _EstudiantePagina();
 }
 
 class _EstudiantePagina extends State<EstudiantePagina> {
   Widget build(BuildContext context) {
+    DataAlumno alumno = new DataAlumno('${widget.response}');
     return Scaffold(
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(bottomRight: Radius.circular(120)),
@@ -21,11 +28,10 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                 Container(
                   height: 170,
                   child: UserAccountsDrawerHeader(
-                    accountName: Text(
-                        "Raymundo Ramirez Alvarez",), //Se tiene que adaptar a la info. del docente
-                    accountEmail: Text(
-                        "ReymondARamirez@gmail.com"), //Se tiene que adaptar a la info. del docente
-
+                    accountName: Text(alumno
+                        .nombre), //Se tiene que adaptar a la info. del docente
+                    accountEmail: Text(alumno
+                        .email), //Se tiene que adaptar a la info. del docente
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: AssetImage(
                           "Assets/Usuario.png"), //Se tiene que adaptar a la info. del docente
@@ -56,7 +62,6 @@ class _EstudiantePagina extends State<EstudiantePagina> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: AppBar(
-
           iconTheme: IconThemeData(
             color: Colors.white,
           ),
@@ -73,11 +78,69 @@ class _EstudiantePagina extends State<EstudiantePagina> {
       ),
 
       // Seccion abajo del AppBar-------------------------------
+      // ignore: todo
       body: Container(
         child: ListView(
           children: [
-            Text("Esto es un test"),
-            //seccionQRLector();
+            Center(
+              child: QrImage(
+                  data: '${alumno.id}', version: QrVersions.auto, size: 320),
+            ),
+            Container(
+                child: Center(
+                    child: RichText(
+              text: TextSpan(
+                  text: "\nCampus Tehuacán\n\n",
+                  style: TextStyle(color:Colors.teal[200], fontSize: 25 ),
+                  children: [
+                    TextSpan(
+                        text: "Nombre: ",
+                        style: TextStyle(
+                            color:  Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
+                    TextSpan(
+                        text: '${alumno.nombre}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                    TextSpan(
+                        text: "Número de Control: ",
+                        style: TextStyle(
+                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
+                    TextSpan(
+                        text: '${alumno.ncontrol}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                    TextSpan(
+                        text: "Carrera: ",
+                        style: TextStyle(
+                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
+                    TextSpan(
+                        text: '${alumno.carrera}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                    TextSpan(
+                        text: "Correo: ",
+                        style: TextStyle(
+                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
+                    TextSpan(
+                        text: '${alumno.email}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                    TextSpan(
+                        text: "Semestre: ",
+                        style: TextStyle(
+                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
+                    TextSpan(
+                        text: '${alumno.semestre}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                  ]),
+            )),
+            decoration: BoxDecoration(
+            color: Colors.grey[100],
+            borderRadius: BorderRadius.circular(70),
+
+            )
+            )
           ],
         ),
       ),

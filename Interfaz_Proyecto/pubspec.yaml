@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.12.2
-  
+  qr_flutter:
   flare_flutter: ^2.0.6
   barcode_scan: ^1.0.0
 
