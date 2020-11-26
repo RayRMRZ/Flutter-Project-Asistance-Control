@@ -119,39 +119,42 @@ class _AdminPagina extends State<AdminPagina> {
       width: 150,
       height: 300,
       margin: EdgeInsets.only(top: 80),
-      child: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: ClipRRect(
-            borderRadius: BorderRadius.circular(200),
-            child: FlatButton(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 70),
+              child: FlatButton(
+                height: 50,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                color: Color.fromRGBO(53, 132, 230, 1),
                 onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => AddAlumnoPagina()));},
                 child: Text("Agregar Alumno", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-              ),
+                ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: ClipRRect(
-            borderRadius: BorderRadius.circular(200),
-            child: FlatButton(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 70),
+              child: FlatButton(
+                height: 50,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                color: Color.fromRGBO(53, 132, 230, 1),
                 onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => AddDocentePagina()));},
                 child: Text("Agregar Docente", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-              ),
+                ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: ClipRRect(
-            borderRadius: BorderRadius.circular(200),
-            child: FlatButton(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 70),
+              child: FlatButton(
+                height: 50,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                color: Color.fromRGBO(53, 132, 230, 1),
                 onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => AddMateriaPagina()));},
                 child: Text("Agregar Materia", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-              ),
+                ),
             ),
-          ),
-        ],
+          ],
+        ),
       )
     );
   }

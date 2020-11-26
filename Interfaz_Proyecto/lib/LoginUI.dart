@@ -65,8 +65,8 @@ class _LoginFormState extends State<LoginForm> {
             MaterialPageRoute(//*******************************************************CAMBIO DE PAGINAS RAPIDO***************************************************** */
                 builder: (context) => 
                 //EstudiantePagina())); 
-                //AdminPagina()));
-               DocentePagina(email, password)));
+                AdminPagina()));
+                //DocentePagina(email, password)));
 
 
         msgValidation = "";
@@ -119,14 +119,13 @@ class _LoginFormState extends State<LoginForm> {
         ),
         );
   }
-} 
 
-final idController = new TextEditingController();
-final passwordController = new TextEditingController();
-String msgValidation = "";
+  final idController = new TextEditingController();
+  final passwordController = new TextEditingController();
+  String msgValidation = "";
 
-Focus textoSeccion() {
-  return Focus(
+  Focus textoSeccion() {
+    return Focus(
       onFocusChange: (hasFocus){
         if(hasFocus){
           tp=20; h=100;}else{
@@ -144,30 +143,36 @@ Focus textoSeccion() {
             txtPassword(" Password", 'Assets/Llave.png'),
           ],
         )),
-  );
-}
-double tp=60,h=200;//Variables de modificación texto y boton sección.
-//Los Metodos Utilizados en textSeccion() son:------------------------
-TextFormField txtEmail(String titulo, String icono) {
-  return TextFormField(
-    controller: idController,
-    style: TextStyle(color: Colors.white),
-    //textAlign: TextAlign.center,
+    );
+  }
+  double tp=60,h=200;//Variables de modificación texto y boton sección.
 
-    decoration: InputDecoration(
+
+//Los Metodos Utilizados en textSeccion() son:------------------------
+  TextFormField txtEmail(String titulo, String icono) {
+    return TextFormField(
+      controller: idController,
+      style: TextStyle(color: Colors.white),
+      decoration: InputDecoration(
       hintText: titulo,
       hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       helperText: msgValidation, //Muestra la validación de correo.
       helperStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       icon: ImageIcon(AssetImage(icono), color: Colors.white),
-    ),
-  );
-}
+      ),
+    );
+  }
 
-TextFormField txtPassword(String titulo, String icono) {
+  bool _passwordVisible = false;
+  @override
+  void initState() {
+    _passwordVisible = false;
+  }
+
+  TextFormField txtPassword(String titulo, String icono) {
   return TextFormField(
     controller: passwordController,
-    obscureText: true,
+    obscureText: !_passwordVisible,
     //onTap: (){tp=50; w=100; h=300;},
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
@@ -175,7 +180,16 @@ TextFormField txtPassword(String titulo, String icono) {
       hintText: titulo,
       hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       icon: ImageIcon(AssetImage(icono), color: Colors.white),
+      suffixIcon: IconButton(
+              icon: Icon(
+          _passwordVisible ? Icons.visibility_rounded : Icons.visibility_off_rounded,
+          color: Colors.white,
+        ),
+        onPressed: () => setState(()  {
+                   _passwordVisible = !_passwordVisible;
+               })
+      ),
     ),
   );
 }
-//-----------------------------------------------------------------
+} 

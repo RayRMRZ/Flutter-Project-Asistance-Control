@@ -34,18 +34,16 @@ class _AddMateriaPagina extends State<AddMateriaPagina> {
           margin: EdgeInsets.symmetric(vertical: 40,horizontal: 50),
           child: ListView(
             children: [
-              txtID("Nombre de Materia", materiaController),
+              txtInput("Nombre de Materia", materiaController),
               Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-              child: ClipRRect(
-              borderRadius: BorderRadius.circular(200),
               child: FlatButton(
                 color: Color.fromRGBO(53, 62, 123, 1),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
                   onPressed: (){/*AQUI METE NU ÑOGICA*/},
                   child: Text("Agregar", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
                 ),
               ),
-            ),
             ]
           ),
         ),
@@ -58,15 +56,30 @@ class _AddMateriaPagina extends State<AddMateriaPagina> {
 
 
 
-TextFormField txtID(String campo, TextEditingController controlador){
-  return TextFormField(
-    controller: controlador,
-    style: TextStyle(color: Colors.black),
-    textAlign: TextAlign.center,
-
-    decoration: InputDecoration(
-      hintText: campo,
-      hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5), ),
+Padding txtInput(String campo, TextEditingController controlador){
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(40), bottomRight: Radius.circular(40)), 
+        color: Color.fromRGBO(53, 62, 123, 0.1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 35),
+        child: TextFormField(
+          controller: controlador,
+          style: TextStyle(color: Colors.black),
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            hintText: campo,
+            hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5), ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(style: BorderStyle.none)
+            )
+          ),
+        ),
+      ),
     ),
   );
 }
