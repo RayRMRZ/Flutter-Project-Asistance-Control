@@ -66,7 +66,7 @@ class _AddAlumnoPagina extends State<AddAlumnoPagina> {
                 txtInput("Numero de Control", numeroControlController),
                  Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(40), bottomRight: Radius.circular(40)), 
+                      borderRadius: BorderRadius.circular(40), 
                       color: Color.fromRGBO(53, 62, 123, 0.1),
                       ),
                     margin: EdgeInsets.symmetric(horizontal: 70),

@@ -17,16 +17,25 @@ class DataDocente {
         '${docenteUser.user.nombre} ${docenteUser.user.apellidoPaterno} ${docenteUser.user.apellidoMaterno}';
     _area = docenteUser.user.docente.area;
   }
-/*   addAssistence(String idenity)async {
+   addAssistence(String idenity)async {
     try{
-    http.Response asistence=await http.post('https://credencia.herokuapp.com/asistencias/$idenity',
-    body:{
-    }
+    print(idenity+'Es igual: 5fbc568bb202ba0017799f82');
+    http.Response asistence = await http.post('https://credencia.herokuapp.com/asistencias',
+    body:
+    {"fecha": '${DateTime.now()}',
+    "asistencia": 'true',
+    "alumno": '$idenity',
+    "clase": "5fb4c651dfe83c001727cbfd"}
     );
+    if(asistence.statusCode==200){
+      print("Asistencia añadida");
+    }else{
+      print('No se pudo añadir la asistencia');
+    }
     }catch(ex){
     print('ErrorExc: $ex');
     }
-  } */
+  }
 
   String get id => _id;
   String get username => _username;
