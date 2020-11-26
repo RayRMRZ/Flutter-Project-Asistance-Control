@@ -11,9 +11,10 @@ class DataAlumno {
   String _especialidad;
   String _nombre;
 
+
   DataAlumno(String respuesta) {
     final alumnoUser = userFromJson(respuesta);
-    _id = alumnoUser.user.id;
+    _id = alumnoUser.user.alumno.id;
     _username = alumnoUser.user.username;
     _email = alumnoUser.user.email;
     _nombre =
