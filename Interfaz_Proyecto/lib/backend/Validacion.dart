@@ -34,7 +34,7 @@ class Validation {
     }
   }
   String sendResponse(){
-    print('Ets: ${conexion_http.respuesta} ');
+    //print('Ets: ${conexion_http.respuesta} ');
     return conexion_http.respuesta;
   }
 }

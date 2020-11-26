@@ -51,7 +51,7 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginForm()))
+                                  builder: (context) => LoginForm(context)))
                         }),
               ],
             ),

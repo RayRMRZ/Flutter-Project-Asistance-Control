@@ -21,6 +21,9 @@ class _DocentePagina extends State<DocentePagina> {
       var qrResult = await BarcodeScanner.scan();
       setState(() {
         result = qrResult.toString();
+        print("Haciendo la asistencia ${docente.addAssistence(result)}");
+        result = 'Pasar una nueva asístencia?';
+
       });
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
@@ -42,9 +45,9 @@ class _DocentePagina extends State<DocentePagina> {
       });
     }
   }
-
+DataDocente docente;
   Widget build(BuildContext context) {
-    DataDocente docente=new DataDocente(widget.response);
+     docente = new DataDocente(widget.response);
     return Scaffold(
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(bottomRight: Radius.circular(120)),
@@ -83,7 +86,7 @@ class _DocentePagina extends State<DocentePagina> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginForm()))
+                                  builder: (context) => LoginForm(context)))
                         }),
               ],
             ),

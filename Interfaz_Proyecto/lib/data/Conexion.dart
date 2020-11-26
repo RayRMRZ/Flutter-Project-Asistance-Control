@@ -1,3 +1,4 @@
+import 'package:Interfaz_Proyecto/Dialogs.dart';
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -23,6 +24,7 @@ class Conexion_http {
         _respuesta=resp.body;
         completer.complete('Se ha realizado la petición http\n');
       } else {
+        
         completer.completeError(
             'Ocurrió un error con la petición! ${resp.statusCode}');
       }

@@ -3,7 +3,7 @@ import 'package:Interfaz_Proyecto/backend/classes/UsuarioA.dart';
 
 class DataAlumno {
   String _id;
-  String _username;
+  static String _username;
   String _email;
   String _ncontrol;
   int _semestre;
@@ -11,9 +11,10 @@ class DataAlumno {
   String _especialidad;
   String _nombre;
 
+
   DataAlumno(String respuesta) {
     final alumnoUser = userFromJson(respuesta);
-    _id = alumnoUser.user.id;
+    _id = alumnoUser.user.alumno.id;
     _username = alumnoUser.user.username;
     _email = alumnoUser.user.email;
     _nombre =
@@ -25,7 +26,7 @@ class DataAlumno {
   }
 
   String get id => _id;
-  String get username => _username;
+  static String get username => _username;
   String get email => _email;
   String get ncontrol => _ncontrol;
   int get semestre => _semestre;
