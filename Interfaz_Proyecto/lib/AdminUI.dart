@@ -1,3 +1,4 @@
+import 'package:Interfaz_Proyecto/backend/classes/DataDocente.dart';
 import 'package:flutter/material.dart';
 import 'AddAlumnoUI.dart';
 import 'AddDocenteUI.dart';
@@ -5,13 +6,16 @@ import 'AddMateriaUI.dart';
 import 'LoginUI.dart';
 
 class AdminPagina extends StatefulWidget {
+  final String response;
+  AdminPagina(this.response);
   @override
   _AdminPagina createState() => _AdminPagina();
 }
 
 class _AdminPagina extends State<AdminPagina> {
-  @override
+  @override 
   Widget build(BuildContext context) {
+    DataDocente docente;
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawer: ClipRRect(
@@ -25,10 +29,8 @@ class _AdminPagina extends State<AdminPagina> {
                 Container(
                   height: 170,
                   child: UserAccountsDrawerHeader(
-                    accountName: Text(
-                        "Raymundo Ramirez Alvarez"), //Se tiene que adaptar a la info. del docente
-                    accountEmail: Text(
-                        "ReymondARamirez@gmail.com"), //Se tiene que adaptar a la info. del docente
+                    accountName: Text('Modo:'), //FIXME:Se tiene que adaptar a la info. del docente
+                    accountEmail: Text('Admin'), //FIXME:Se tiene que adaptar a la info. del docente
 
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: AssetImage(
@@ -119,39 +121,42 @@ class _AdminPagina extends State<AdminPagina> {
       width: 150,
       height: 300,
       margin: EdgeInsets.only(top: 80),
-      child: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: ClipRRect(
-            borderRadius: BorderRadius.circular(200),
-            child: FlatButton(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 70),
+              child: FlatButton(
+                height: 50,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                color: Color.fromRGBO(53, 132, 230, 1),
                 onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => AddAlumnoPagina()));},
                 child: Text("Agregar Alumno", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-              ),
+                ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: ClipRRect(
-            borderRadius: BorderRadius.circular(200),
-            child: FlatButton(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 70),
+              child: FlatButton(
+                height: 50,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                color: Color.fromRGBO(53, 132, 230, 1),
                 onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => AddDocentePagina()));},
                 child: Text("Agregar Docente", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-              ),
+                ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: ClipRRect(
-            borderRadius: BorderRadius.circular(200),
-            child: FlatButton(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 70),
+              child: FlatButton(
+                height: 50,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                color: Color.fromRGBO(53, 132, 230, 1),
                 onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => AddMateriaPagina()));},
                 child: Text("Agregar Materia", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
-              ),
+                ),
             ),
-          ),
-        ],
+          ],
+        ),
       )
     );
   }

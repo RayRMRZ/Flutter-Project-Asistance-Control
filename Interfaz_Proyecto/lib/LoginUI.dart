@@ -9,21 +9,21 @@ import 'package:flutter/rendering.dart';
 import 'backend/Validacion.dart';
 import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
-//import 'AdminUI.dart';
+import 'AdminUI.dart';
 
 class LoginForm extends StatefulWidget {
-  BuildContext context;
-  LoginForm(this.context);
+  BuildContext contextMain;
+  LoginForm(this.contextMain);
   @override
   _LoginFormState createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextLogin) {
     return GestureDetector(
       onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
+        FocusScopeNode currentFocus = FocusScope.of(contextLogin);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
@@ -73,6 +73,8 @@ class _LoginFormState extends State<LoginForm> {
               MaterialPageRoute(
                   builder: (context) =>
                       DocentePagina(validation.sendResponse())));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AdminPagina(validation.sendResponse())));
         } else {
           helperEmail = "";
           Navigator.push(
@@ -83,13 +85,10 @@ class _LoginFormState extends State<LoginForm> {
           Dialogs.confirmAbortDialog(
               context: context,
               title: 'Bienvenido',
-              body: 'Aqui iría un mensaje\nde autosuperasión',
-              );
-          /* Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AdminPagina())); */
+              body: 'Aqui iría un mensaje\nde autosuperasión'); 
         }
       } else {
-        //Aqui iría el AlertDialog//
+        
       }
     } else {
       helperEmail = 'El correo es inválido';
@@ -139,7 +138,7 @@ class _LoginFormState extends State<LoginForm> {
       ),
     );
   }
-}
+
 
 final idController = new TextEditingController();
 final passwordController = new TextEditingController();
@@ -168,31 +167,36 @@ Focus textoSeccion() {
             txtPassword(" Password", 'Assets/Llave.png'),
           ],
         )),
-  );
-}
+    );
+  }
+  double tp=60,h=200;//Variables de modificación texto y boton sección.
 
-double tp = 60, h = 200; //Variables de modificación texto y boton sección.
+
 //Los Metodos Utilizados en textSeccion() son:------------------------
-TextFormField txtEmail(String titulo, String icono) {
-  return TextFormField(
-    controller: idController,
-    style: TextStyle(color: Colors.white),
-    //textAlign: TextAlign.center,
-
-    decoration: InputDecoration(
+  TextFormField txtEmail(String titulo, String icono) {
+    return TextFormField(
+      controller: idController,
+      style: TextStyle(color: Colors.white),
+      decoration: InputDecoration(
       hintText: titulo,
       hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       helperText: helperEmail, //Muestra la validación de correo.
       helperStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       icon: ImageIcon(AssetImage(icono), color: Colors.white),
-    ),
-  );
-}
+      ),
+    );
+  }
 
-TextFormField txtPassword(String titulo, String icono) {
+  bool _passwordVisible = false;
+  @override
+  void initState() {
+    _passwordVisible = false;
+  }
+
+  TextFormField txtPassword(String titulo, String icono) {
   return TextFormField(
     controller: passwordController,
-    obscureText: true,
+    obscureText: !_passwordVisible,
     //onTap: (){tp=50; w=100; h=300;},
     style: TextStyle(color: Colors.white),
     //textAlign: TextAlign.center,
@@ -200,7 +204,16 @@ TextFormField txtPassword(String titulo, String icono) {
       hintText: titulo,
       hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
       icon: ImageIcon(AssetImage(icono), color: Colors.white),
+      suffixIcon: IconButton(
+              icon: Icon(
+          _passwordVisible ? Icons.visibility_rounded : Icons.visibility_off_rounded,
+          color: Colors.white,
+        ),
+        onPressed: () => setState(()  {
+                   _passwordVisible = !_passwordVisible;
+               })
+      ),
     ),
   );
 }
-//-----------------------------------------------------------------
+}

@@ -14,7 +14,7 @@ class DocentePagina extends StatefulWidget {
   _DocentePagina createState() => _DocentePagina();
 }
 class _DocentePagina extends State<DocentePagina> {
-  var result = "Pasar Lista";
+  var result = "Pasar Lista"; DataDocente docente;
 
   Future _scanQR() async {
     try {
@@ -45,7 +45,7 @@ class _DocentePagina extends State<DocentePagina> {
       });
     }
   }
-DataDocente docente;
+
   Widget build(BuildContext context) {
      docente = new DataDocente(widget.response);
     return Scaffold(

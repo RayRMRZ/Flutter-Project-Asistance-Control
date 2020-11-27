@@ -20,7 +20,7 @@ class Conexion_http {
           body: {'identifier': email, 'password': password});
 
       if (resp.statusCode == 200) {
-        getDatatoCompare();
+        _getDatatoCompare();
         _respuesta=resp.body;
         completer.complete('Se ha realizado la petición http\n');
       } else {
@@ -34,8 +34,7 @@ class Conexion_http {
     return completer.future;
   }
 
-  getDatatoCompare() async {
+  _getDatatoCompare() async {
     _flag = 1;
   }
-
 }
