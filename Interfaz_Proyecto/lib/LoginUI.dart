@@ -1,4 +1,9 @@
+import 'dart:math';
+
+import 'package:Interfaz_Proyecto/AdminUI.dart';
+import 'package:Interfaz_Proyecto/Dialogs.dart';
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
+import 'package:Interfaz_Proyecto/backend/classes/DataAlumno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'backend/Validacion.dart';
@@ -7,6 +12,8 @@ import 'DocenteUI.dart';
 //import 'AdminUI.dart';
 
 class LoginForm extends StatefulWidget {
+  BuildContext context;
+  LoginForm(this.context);
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -58,15 +65,28 @@ class _LoginFormState extends State<LoginForm> {
     if (validation.isCorrect(email)) {
       print('El correo: $email ===> es valido');
 
-      if (await validation.exists(email, password,control)) {
+      if (await validation.exists(email, password, control)) {
         if (control.pagDoc == true) {
           helperEmail = "";
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DocentePagina(validation.sendResponse())));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      DocentePagina(validation.sendResponse())));
         } else {
           helperEmail = "";
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => EstudiantePagina(validation.sendResponse())));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      EstudiantePagina(validation.sendResponse())));
+          Dialogs.confirmAbortDialog(
+              context: context,
+              title: 'Bienvenido',
+              body: 'Aqui iría un mensaje\nde autosuperasión',
+              );
+          /* Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AdminPagina())); */
         }
       } else {
         //Aqui iría el AlertDialog//

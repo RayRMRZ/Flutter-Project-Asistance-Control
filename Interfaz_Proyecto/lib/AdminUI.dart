@@ -43,7 +43,7 @@ class _AdminPagina extends State<AdminPagina> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginForm()))
+                                  builder: (context) => LoginForm(context)))
                         }),
               ],
             ),
