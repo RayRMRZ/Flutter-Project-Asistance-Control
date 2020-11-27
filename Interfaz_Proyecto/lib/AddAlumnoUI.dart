@@ -56,7 +56,7 @@ class _AddAlumnoPagina extends State<AddAlumnoPagina> {
         
         body: Container(
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 20,horizontal: 30),
+            margin: EdgeInsets.symmetric(vertical: 10,horizontal: 30),
             child: ListView(
               children: [
                 txtInput("Nombre", nameController),
@@ -73,15 +73,15 @@ class _AddAlumnoPagina extends State<AddAlumnoPagina> {
                     child: Center(
                       child: DropdownButton<String>(
                         value: semestreSeleccionado,
-                        onChanged: (value){
+                        onChanged: (valorSemestre){
                           setState((){
-                            semestreSeleccionado = value;
+                            semestreSeleccionado = valorSemestre;
                           });
                         },
-                        items: semestres.map<DropdownMenuItem<String>>((value){
+                        items: semestres.map<DropdownMenuItem<String>>((valorSemestre){
                           return DropdownMenuItem(
-                            child: Text(value, style: TextStyle(),),
-                            value: value,
+                            child: Center(child: Text(valorSemestre)),
+                            value: valorSemestre,
                             );
                         }).toList(),
                       ),
@@ -94,8 +94,9 @@ class _AddAlumnoPagina extends State<AddAlumnoPagina> {
                 txtPassword("Contraseña", passwordController),
                 txtPassword("Confirmar Contraseña", password2Controller),
                 Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 90),
                   child: FlatButton(
+                    height: 40,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
                     color: Color.fromRGBO(53, 132, 230, 1),
                       onPressed: (){/*AQUI METE NU ÑOGICA*/},
@@ -125,8 +126,10 @@ Padding txtInput(String campo, TextEditingController controlador){
         color: Color.fromRGBO(53, 62, 123, 0.1),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: TextFormField(
+          cursorWidth: 3,
+          cursorHeight: 25,
           controller: controlador,
           style: TextStyle(color: Colors.black),
           textAlign: TextAlign.center,
@@ -134,8 +137,9 @@ Padding txtInput(String campo, TextEditingController controlador){
             hintText: campo,
             hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5), ),
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(style: BorderStyle.none)
-            )
+              borderSide: BorderSide(style: BorderStyle.none)),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(style: BorderStyle.none))
           ),
         ),
       ),
@@ -160,8 +164,10 @@ Padding txtInput(String campo, TextEditingController controlador){
         color: Color.fromRGBO(53, 62, 123, 0.1),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         child: TextFormField(
+          cursorWidth: 3,
+          cursorHeight: 25,
           textAlign: TextAlign.center,
           controller: passwordController,
           obscureText: !_passwordVisible,
@@ -169,15 +175,16 @@ Padding txtInput(String campo, TextEditingController controlador){
           //textAlign: TextAlign.center,
           decoration: InputDecoration(
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(style: BorderStyle.none)
-            ),
+              borderSide: BorderSide(style: BorderStyle.none)),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(style: BorderStyle.none)),
             hintText: titulo,
             hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
             //icon: ImageIcon(AssetImage(icono), color: Colors.white),
             suffixIcon: IconButton(
                     icon: Icon(
                 _passwordVisible ? Icons.visibility_rounded : Icons.visibility_off_rounded,
-                color: Colors.black,
+                color: Color.fromRGBO(53, 62, 123, 1),
               ),
               onPressed: () => setState(()  {
                          _passwordVisible = !_passwordVisible;

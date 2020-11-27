@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'backend/Validacion.dart';
 import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
-//import 'AdminUI.dart';
+import 'AdminUI.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -62,11 +62,13 @@ class _LoginFormState extends State<LoginForm> {
         if (control.pagDoc == true) {
           helperEmail = "";
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DocentePagina(validation.sendResponse())));
+              //MaterialPageRoute(builder: (context) => DocentePagina(validation.sendResponse())));
+              MaterialPageRoute(builder: (context) => AdminPagina()));
         } else {
           helperEmail = "";
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => EstudiantePagina(validation.sendResponse())));
+              
         }
       } else {
         //Aqui iría el AlertDialog//

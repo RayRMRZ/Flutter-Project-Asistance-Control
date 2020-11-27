@@ -31,13 +31,14 @@ class _AddMateriaPagina extends State<AddMateriaPagina> {
       
       body: Container(
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 40,horizontal: 50),
+          margin: EdgeInsets.symmetric(vertical: 40,horizontal: 30),
           child: ListView(
             children: [
               txtInput("Nombre de Materia", materiaController),
               Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 90),
               child: FlatButton(
+                height: 40,
                 color: Color.fromRGBO(53, 62, 123, 1),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
                   onPressed: (){/*AQUI METE NU ÑOGICA*/},
@@ -68,6 +69,8 @@ Padding txtInput(String campo, TextEditingController controlador){
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 35),
         child: TextFormField(
+          cursorWidth: 3,
+          cursorHeight: 25,
           controller: controlador,
           style: TextStyle(color: Colors.black),
           textAlign: TextAlign.center,
@@ -75,8 +78,9 @@ Padding txtInput(String campo, TextEditingController controlador){
             hintText: campo,
             hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5), ),
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(style: BorderStyle.none)
-            )
+              borderSide: BorderSide(style: BorderStyle.none)),
+              focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(style: BorderStyle.none))
           ),
         ),
       ),
