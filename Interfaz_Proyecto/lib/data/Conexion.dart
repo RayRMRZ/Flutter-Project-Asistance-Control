@@ -1,4 +1,3 @@
-import 'package:Interfaz_Proyecto/Dialogs.dart';
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';

@@ -18,6 +18,36 @@ class Validation {
     }
     return _;
   }
+  bool formatString(String texto){
+    var pattern=r'^[^0-9]\w+(\s)*?(.)*$';
+    var reExp=RegExp(pattern);
+    
+  if(reExp.hasMatch(texto)){
+    return true;
+  }else{
+    return false;
+  }
+  }
+  bool formatNcontrol(String numero){
+  var pattern=r'^[0-9]{8}$';
+    var reExp=RegExp(pattern);
+    
+  if(reExp.hasMatch(numero)){
+    return true;
+  }else{
+    return false;
+  }
+  }
+  bool formatNSem(String numero){
+    var pattern=r'^(1|2|3|4|5|6|7|8|9|10|11|12|13)$';
+    var reExp=RegExp(pattern);
+    
+  if(reExp.hasMatch(numero)){
+    return true;
+  }else{
+    return false;
+  }
+  }
 
   Future<bool> exists(String email, String password, Control control) async {
     var cnx = await conexion_http.getStatusCode(email, password, control);
