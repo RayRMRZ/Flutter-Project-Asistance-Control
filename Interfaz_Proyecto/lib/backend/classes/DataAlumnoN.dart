@@ -3,12 +3,14 @@
 //     final alumno = alumnoFromJson(jsonString);
 
 import 'dart:convert';
-
+///Convierte json a objeto de tipo Alumno, [param] response.body (str).
 Alumno alumnoFromJson(String str) => Alumno.fromJson(json.decode(str));
-
+///Codifica atributos de Alumno a formato json,[param] Objeto de tipo Clase (data).
 String alumnoToJson(Alumno data) => json.encode(data.toJson());
-
+///Clase Alumno contiene métodos para decodificar formatos Json a objetos de tipo
+/// Alumno y convertirlos a String.
 class Alumno {
+///Constructor de clase Alumno.
     Alumno({
         this.clases,
         this.id,
@@ -38,7 +40,9 @@ class Alumno {
     UsersPermissionsUser usersPermissionsUser;
     List<Asistencia> asistencias;
     String alumnoId;
-
+///Decodifica json para convertirlo en objeto.
+///[param] Recibe un Mapa (json)
+///[return] Retorna un Alumno.
     factory Alumno.fromJson(Map<String, dynamic> json) => Alumno(
         clases: List<Clase>.from(json["clases"].map((x) => Clase.fromJson(x))),
         id: json["_id"],
@@ -54,7 +58,8 @@ class Alumno {
         asistencias: List<Asistencia>.from(json["asistencias"].map((x) => Asistencia.fromJson(x))),
         alumnoId: json["id"],
     );
-
+///toJson()
+///Convierte atributos de la clase Alumno a formato Json.
     Map<String, dynamic> toJson() => {
         "clases": List<dynamic>.from(clases.map((x) => x.toJson())),
         "_id": id,
@@ -71,8 +76,10 @@ class Alumno {
         "id": alumnoId,
     };
 }
-
+///Clase Asistencia contiene métodos para decodificar formatos Json a objetos de tipo
+/// Asistencia y convertirlos a String.
 class Asistencia {
+/// Constructor de clase Asistencia.
     Asistencia({
         this.id,
         this.publishedAt,
@@ -96,7 +103,9 @@ class Asistencia {
     String alumno;
     String clase;
     String asistenciaId;
-
+///Decodifica json para convertirlo en objeto.
+///[param] Recibe un Mapa (json)
+///[return] Retorna un Asistencia.
     factory Asistencia.fromJson(Map<String, dynamic> json) => Asistencia(
         id: json["_id"],
         publishedAt: DateTime.parse(json["published_at"]),
@@ -109,7 +118,8 @@ class Asistencia {
         clase: json["clase"],
         asistenciaId: json["id"],
     );
-
+///toJson()
+///Convierte atributos de la clase Asistencia a formato Json.
     Map<String, dynamic> toJson() => {
         "_id": id,
         "published_at": publishedAt.toIso8601String(),
@@ -123,8 +133,10 @@ class Asistencia {
         "id": asistenciaId,
     };
 }
-
+///Clase "Clase" contiene métodos para decodificar formatos Json a objetos de tipo
+/// Clase y convertirlos a String.
 class Clase {
+///Constructor de clase Clase.
     Clase({
         this.id,
         this.horaInicial,
@@ -148,7 +160,9 @@ class Clase {
     String docente;
     String materia;
     String claseId;
-
+///Decodifica json para convertirlo en objeto.
+///[param] Recibe un Mapa (json)
+///[return] Retorna una Clase.
     factory Clase.fromJson(Map<String, dynamic> json) => Clase(
         id: json["_id"],
         horaInicial: json["hora_inicial"],
@@ -161,7 +175,8 @@ class Clase {
         materia: json["materia"],
         claseId: json["id"],
     );
-
+///toJson()
+///Convierte atributos de la clase Clase a formato Json.
     Map<String, dynamic> toJson() => {
         "_id": id,
         "hora_inicial": horaInicial,
@@ -175,8 +190,10 @@ class Clase {
         "id": claseId,
     };
 }
-
+///Clase UsersPermissionsUser contiene métodos para decodificar formatos Json a objetos de tipo
+/// UsersPermissionsUser y convertirlos a String.
 class UsersPermissionsUser {
+///Constructor de clase UsersPermissionsUser.
     UsersPermissionsUser({
         this.confirmed,
         this.blocked,
@@ -212,7 +229,9 @@ class UsersPermissionsUser {
     String role;
     String alumno;
     String usersPermissionsUserId;
-
+///Decodifica json para convertirlo en objeto.
+///[param] Recibe un Mapa (json)
+///[return] Retorna una UsersPermissionsUser.
     factory UsersPermissionsUser.fromJson(Map<String, dynamic> json) => UsersPermissionsUser(
         confirmed: json["confirmed"],
         blocked: json["blocked"],
@@ -231,7 +250,8 @@ class UsersPermissionsUser {
         alumno: json["alumno"],
         usersPermissionsUserId: json["id"],
     );
-
+///toJson()
+///Convierte atributos de la clase UsersPermissionsUser a formato Json.
     Map<String, dynamic> toJson() => {
         "confirmed": confirmed,
         "blocked": blocked,

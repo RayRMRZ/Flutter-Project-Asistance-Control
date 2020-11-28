@@ -1,31 +1,37 @@
+
+import 'dart:async';
+
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:Interfaz_Proyecto/backend/classes/Clase.dart';
 import 'package:Interfaz_Proyecto/backend/classes/DataAlumno.dart';
 import 'package:Interfaz_Proyecto/backend/classes/DataAlumnoN.dart';
 import 'package:Interfaz_Proyecto/backend/classes/Materia.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
 
+import 'package:http/http.dart' as http;
+
+///Clase Conexion_http realiza métodos CRUD hacia 
+///API.
 // ignore: camel_case_types
 class Conexion_http {
   int _flag = 0;
 
   String _respuesta;
 
+  List<dynamic> _idMateria;
   List<dynamic> _nombres;
-
   List<dynamic> _horaI;
-
   List<dynamic> _horaF;
-
-  List<dynamic> _id_Materia;
-
+  List <dynamic> _clases;
+///Obtiene el código de estado del ingreso en login,
+///[params] recibe correo, contraseña y el control del loginUI
+///(email)(password)(control)
+///[return] retorna un objeto de tipo Completer con mensaje
+///del estado de conexión.
   Future<String> getStatusCode(
       String email, String password, Control control) async {
     Completer completer = Completer<String>();
     try {
-      final http.Response resp = await http.post(
-          'https://credencia.herokuapp.com/auth/local',
+      final http.Response resp = await http.post('https://credencia.herokuapp.com/auth/local',
           body: {'identifier': email, 'password': password});
 
       if (resp.statusCode == 200) {
@@ -45,15 +51,15 @@ class Conexion_http {
     }
     return completer.future;
   }
-
+///Asigna a flag=1 si el resp.statusCode==200.
   _getDatatoCompare() async {
     _flag = 1;
   }
-
-  // ignore: unused_element
-  _getClases(String r) async {
-    DataAlumno alumnoUs = new DataAlumno(r);
-    _id_Materia = ['ID materia:'];
+///Obtiene clases del Alumno y se asignan a _clases,
+///[param] recibe resp.body (respuesta).
+  _getClases(String respuesta) async {
+    DataAlumno alumnoUs = new DataAlumno(respuesta);
+    _idMateria = ['ID materia:'];
     _nombres = ['Materias:'];
     _horaI = ['Inicial:'];
     _horaF = ['Final:'];
@@ -64,8 +70,7 @@ class Conexion_http {
 
       if (alumno.statusCode == 200) {
         final jsonAlumno = alumnoFromJson(alumno.body);
-        print("Número de Clases: ${jsonAlumno.clases.length}");
-
+        _clases=[jsonAlumno.clases.length];
         for (int i = 0; i < (jsonAlumno.clases.length); i++) {
           try {
             http.Response matter = await http.get(
@@ -75,7 +80,7 @@ class Conexion_http {
               final jsonMateria = materiaFromJson(matter.body);
               /* print(jsonMateria.nombreMateria); */
               _nombres.add(jsonMateria.nombreMateria);
-              _id_Materia.add(jsonAlumno.clases[i].materia);
+              _idMateria.add(jsonAlumno.clases[i].materia);
               try {
                 http.Response clase = await http.get(
                     'https://credencia.herokuapp.com/clases/${jsonAlumno.clases[i].claseId}');
@@ -98,20 +103,31 @@ class Conexion_http {
           }
         }
 
-        print(nombres);
-        print(id_Materia);
-        print(horaI);
-        print(horaF);
+        print(_nombres);
+        print(_idMateria);
+        print(_horaI);
+        print(_horaF);
+
+        _clases.add(_nombres);_clases.add(_idMateria);_clases.add(_horaI);_clases.add(_horaF);
+        
       }
     } catch (ex) {
       print('Excepción: $ex');
     }
   }
-
+///[return] flag.
   int get flag => _flag;
+///[return] respuesta. 
   String get respuesta => _respuesta;
+///[return] nombres de clases.
   List<dynamic> get nombres => _nombres;
+///[return] hora inicial.
   List<dynamic> get horaI => _horaI;
+///[return] hora final.
   List<dynamic> get horaF => _horaF;
-  List<dynamic> get id_Materia => _id_Materia;
+///[return] identificador de materia.
+  List<dynamic> get idMateria => _idMateria;
+///[return] Lista dinamica que contiene datos
+///relacionados con las clases del usuario.
+  List <dynamic> get clases => _clases;
 }

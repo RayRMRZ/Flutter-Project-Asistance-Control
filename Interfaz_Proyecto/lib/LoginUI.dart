@@ -1,8 +1,10 @@
-import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
+import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
+import 'backend/Validacion.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'backend/Validacion.dart';
+
 import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
 import 'AdminUI.dart';

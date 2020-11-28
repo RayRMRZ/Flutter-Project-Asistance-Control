@@ -1,4 +1,7 @@
+///Clase Docente contiene métodos para decodificar formatos Json a objetos de tipo
+/// Docente y convertirlos a String.
 class Docente {
+  ///Contructor clase Docente.
     Docente({
         this.id,
         this.area,
@@ -18,7 +21,9 @@ class Docente {
     int v;
     String usersPermissionsUser;
     String docenteId;
-
+///Decodifica json para convertirlo en objeto.
+///[param] Recibe un Mapa (json)
+///[return] Retorna un Docente.
     factory Docente.fromJson(Map<String, dynamic> json) => Docente(
         id: json["_id"],
         area: json["area"],
@@ -29,7 +34,8 @@ class Docente {
         usersPermissionsUser: json["users_permissions_user"],
         docenteId: json["id"],
     );
-
+///toJson()
+///Convierte atributos de la clase Docente a formato Json.
     Map<String, dynamic> toJson() => {
         "_id": id,
         "area": area,

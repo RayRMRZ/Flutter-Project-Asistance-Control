@@ -3,12 +3,14 @@
 //     final materia = materiaFromJson(jsonString);
 
 import 'dart:convert';
-
+///Convierte json a objeto de tipo Materia, [param] response.body (str).
 Materia materiaFromJson(String str) => Materia.fromJson(json.decode(str));
-
+///Codifica atributos de Materia a formato json,[param] Objeto de tipo Clase (data).
 String materiaToJson(Materia data) => json.encode(data.toJson());
-
+///Clase Materia contiene métodos para decodificar formatos Json a objetos de tipo
+/// Materia y convertirlos a String.
 class Materia {
+///Constructor de clase Materia.
     Materia({
         this.id,
         this.nombreMateria,
@@ -28,7 +30,9 @@ class Materia {
     int v;
     List<Clase> clases;
     String materiaId;
-
+///Decodifica json para convertirlo en objeto.
+///[param] Recibe un Mapa (json)
+///[return] Retorna un Materia.
     factory Materia.fromJson(Map<String, dynamic> json) => Materia(
         id: json["_id"],
         nombreMateria: json["nombre_materia"],
@@ -39,7 +43,8 @@ class Materia {
         clases: List<Clase>.from(json["clases"].map((x) => Clase.fromJson(x))),
         materiaId: json["id"],
     );
-
+///toJson()
+///Convierte atributos de la clase Materia a formato Json.
     Map<String, dynamic> toJson() => {
         "_id": id,
         "nombre_materia": nombreMateria,
@@ -51,8 +56,10 @@ class Materia {
         "id": materiaId,
     };
 }
-
+///Clase "Clase" contiene métodos para decodificar formatos Json a objetos de tipo
+/// Clase y convertirlos a String.
 class Clase {
+/// Constructor clase Clase.
     Clase({
         this.id,
         this.horaInicial,
@@ -76,7 +83,9 @@ class Clase {
     String docente;
     String materia;
     String claseId;
-
+///Decodifica json para convertirlo en objeto.
+///[param] Recibe un Mapa (json)
+///[return] Retorna una Clase.
     factory Clase.fromJson(Map<String, dynamic> json) => Clase(
         id: json["_id"],
         horaInicial: json["hora_inicial"],
@@ -89,7 +98,8 @@ class Clase {
         materia: json["materia"],
         claseId: json["id"],
     );
-
+///toJson()
+///Convierte atributos de la clase Clase a formato Json.
     Map<String, dynamic> toJson() => {
         "_id": id,
         "hora_inicial": horaInicial,

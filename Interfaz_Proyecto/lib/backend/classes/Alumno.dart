@@ -1,4 +1,7 @@
+///Clase Alumno contiene métodos para decodificar formatos Json a objetos de tipo
+/// Alumno y convertirlos a String.
 class Alumno {
+  ///Constructor de la clase Alumno.
   Alumno({
     this.clases,
     this.id,
@@ -26,7 +29,9 @@ class Alumno {
   int v;
   String usersPermissionsUser;
   String alumnoId;
-
+///Decodifica json para convertirlo en objeto.
+///[param] Recibe un Mapa (json)
+///[return] Retorna un Alumno.
   factory Alumno.fromJson(Map<String, dynamic> json) => Alumno(
         clases: List<dynamic>.from(json["clases"].map((x) => x)),
         id: json["_id"],
@@ -41,7 +46,8 @@ class Alumno {
         usersPermissionsUser: json["users_permissions_user"],
         alumnoId: json["id"],
       );
-
+///toJson()
+///Convierte atributos de la clase Alumno a formato Json.
   Map<String, dynamic> toJson() => {
         "clases": List<dynamic>.from(clases.map((x) => x)),
         "_id": id,

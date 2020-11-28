@@ -3,11 +3,12 @@
 //     final clase = claseFromJson(jsonString);
 
 import 'dart:convert';
-
+///Convierte json a objeto de tipo Clase, [param] response.body (str).
 Clase claseFromJson(String str) => Clase.fromJson(json.decode(str));
-
+///Codifica atributos de Clase a formato json,[param] Objeto de tipo Clase (data).
 String claseToJson(Clase data) => json.encode(data.toJson());
-
+///Clase "Clase" contiene métodos para decodificar formatos Json a objetos de tipo
+/// Clase y convertirlos a String.
 class Clase {
     Clase({
         this.id,
@@ -36,7 +37,9 @@ class Clase {
     List<Asistencia> asistencias;
     List<Alumno> alumnos;
     String claseId;
-
+///Decodifica json para convertirlo en objeto.
+///[param] Recibe un Mapa (json)
+///[return] Retorna una Clase.
     factory Clase.fromJson(Map<String, dynamic> json) => Clase(
         id: json["_id"],
         horaInicial: json["hora_inicial"],
@@ -51,7 +54,8 @@ class Clase {
         alumnos: List<Alumno>.from(json["alumnos"].map((x) => Alumno.fromJson(x))),
         claseId: json["id"],
     );
-
+///toJson()
+///Convierte atributos de la clase Clase a formato Json.
     Map<String, dynamic> toJson() => {
         "_id": id,
         "hora_inicial": horaInicial,
