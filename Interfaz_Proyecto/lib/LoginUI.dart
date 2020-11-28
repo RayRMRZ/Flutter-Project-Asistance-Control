@@ -58,9 +58,10 @@ class _LoginFormState extends State<LoginForm> {
     Validation validation = new Validation();
 
     print('El correo es de la tabla: ${control.inicio(email)}');
+
     if (validation.isCorrect(email)) {
       
-      print('El correo: $email ===> es valido');
+      /* print('El correo: $email ===> es valido'); */
       try{
             if (await validation.exists(email, password, control)==true) {
         if (control.pagDoc == true) {
