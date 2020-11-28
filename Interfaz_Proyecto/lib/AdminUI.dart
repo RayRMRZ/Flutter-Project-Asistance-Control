@@ -1,4 +1,3 @@
-import 'package:Interfaz_Proyecto/backend/classes/DataDocente.dart';
 import 'package:flutter/material.dart';
 import 'AddAlumnoUI.dart';
 import 'AddDocenteUI.dart';
@@ -15,7 +14,7 @@ class AdminPagina extends StatefulWidget {
 class _AdminPagina extends State<AdminPagina> {
   @override 
   Widget build(BuildContext context) {
-    DataDocente docente;
+    
     return Scaffold(
       extendBodyBehindAppBar: true,
       drawer: ClipRRect(

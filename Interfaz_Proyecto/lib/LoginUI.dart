@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:Interfaz_Proyecto/AdminUI.dart';
 import 'package:Interfaz_Proyecto/Dialogs.dart';
+import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
-import 'package:Interfaz_Proyecto/backend/classes/DataAlumno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'backend/Validacion.dart';
@@ -63,9 +61,10 @@ class _LoginFormState extends State<LoginForm> {
 
     print('El correo es de la tabla: ${control.inicio(email)}');
     if (validation.isCorrect(email)) {
+      
       print('El correo: $email ===> es valido');
-
-      if (await validation.exists(email, password, control)) {
+      try{
+            if (await validation.exists(email, password, control)==true) {
         if (control.pagDoc == true) {
           helperEmail = "";
           Navigator.push(
@@ -75,6 +74,7 @@ class _LoginFormState extends State<LoginForm> {
                       DocentePagina(validation.sendResponse())));
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => AdminPagina(validation.sendResponse())));
+            FlushBar_Snack.welcomeMsg(context);
         } else {
           helperEmail = "";
           Navigator.push(
@@ -82,14 +82,15 @@ class _LoginFormState extends State<LoginForm> {
               MaterialPageRoute(
                   builder: (context) =>
                       EstudiantePagina(validation.sendResponse())));
-          Dialogs.confirmAbortDialog(
-              context: context,
-              title: 'Bienvenido',
-              body: 'Aqui iría un mensaje\nde autosuperasión'); 
         }
-      } else {
+      } else {}
+      }catch(ex){
+        FlushBar_Snack.showConexionError(context);
+        print('Excepción $ex');
+      }finally{
         
       }
+
     } else {
       helperEmail = 'El correo es inválido';
     }
