@@ -1,5 +1,3 @@
-import 'package:Interfaz_Proyecto/AdminUI.dart';
-import 'package:Interfaz_Proyecto/Dialogs.dart';
 import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:flutter/material.dart';
@@ -72,8 +70,8 @@ class _LoginFormState extends State<LoginForm> {
               MaterialPageRoute(
                   builder: (context) =>
                       DocentePagina(validation.sendResponse())));
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AdminPagina(validation.sendResponse())));
+          /* Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AdminPagina(validation.sendResponse()))); */
             FlushBar_Snack.welcomeMsg(context);
         } else {
           helperEmail = "";
@@ -82,15 +80,13 @@ class _LoginFormState extends State<LoginForm> {
               MaterialPageRoute(
                   builder: (context) =>
                       EstudiantePagina(validation.sendResponse())));
+                      FlushBar_Snack.welcomeMsg(context);
         }
       } else {}
       }catch(ex){
         FlushBar_Snack.showConexionError(context);
         print('Excepción $ex');
-      }finally{
-        
       }
-
     } else {
       helperEmail = 'El correo es inválido';
     }

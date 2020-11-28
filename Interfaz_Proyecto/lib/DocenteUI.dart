@@ -1,3 +1,4 @@
+import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/LoginUI.dart';
 import 'package:Interfaz_Proyecto/backend/classes/DataDocente.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +34,17 @@ class _DocentePagina extends State<DocentePagina> {
       } else {
         setState(() {
           result = "Unknown Error$e";
+          FlushBar_Snack.errorQrMsg(context, result);
         });
       }
     } on FormatException {
       setState(() {
-        result = "Presionaste el boton antes de escanear algo";
+        result = 'Aún no haz escaneado, Escanear?';
+        FlushBar_Snack.errorQrMsg(context, 'Presionaste el boton antes de escanear algo');
       });
     } catch (e) {
       setState(() {
-        result = "Unknown Error$e";
+        FlushBar_Snack.errorQrMsg(context, "Unknown Error$e");
       });
     }
   }
@@ -117,7 +120,7 @@ class _DocentePagina extends State<DocentePagina> {
       body: ListView(children: <Widget>[
         Container(
             margin: EdgeInsets.only(top: 60.0, left: 10.0, right: 10.0, bottom: 20),
-            height: 180,
+            height: 250,
             child: FlareActor(
               "Assets/Qr loading.flr",
               animation: "scanning",

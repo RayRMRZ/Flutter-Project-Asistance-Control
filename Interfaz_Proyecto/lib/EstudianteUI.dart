@@ -86,7 +86,8 @@ class _EstudiantePagina extends State<EstudiantePagina> {
               child: QrImage(
                   data: '${alumno.id}', version: QrVersions.auto, size: 320),
             ),
-            Container(
+            Card(
+              child: Container(
                 child: Center(
                     child: RichText(
               text: TextSpan(
@@ -135,14 +136,11 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                             color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
                   ]),
             )),
-            decoration: BoxDecoration(
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.circular(70),
-
             )
             )
           ],
-        ),
+        
+        )
       ),
     );
   }

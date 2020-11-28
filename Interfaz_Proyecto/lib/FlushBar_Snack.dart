@@ -24,7 +24,6 @@ static void showConexionError(BuildContext context){
       ),
     ],
     duration: Duration(seconds: 5),
-    forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
     backgroundColor: Color.fromRGBO(53, 62, 123, 1),
   )..show(context);
 }
@@ -34,7 +33,18 @@ static void welcomeMsg(BuildContext context){
     icon: Icon(
       Icons.login,
       size: 28,
-      color: Colors.white54,
+      color: Color.fromRGBO(53, 132, 230, 1),
+    ),
+    duration: Duration(seconds: 3),
+  )..show(context);
+}
+static void errorQrMsg(BuildContext context,String msg){
+  Flushbar(
+    message: msg,
+    icon: Icon(
+      Icons.qr_code,
+      size: 28,
+      color: Colors.red,
     ),
     duration: Duration(seconds: 3),
     forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
