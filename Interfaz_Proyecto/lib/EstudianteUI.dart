@@ -1,5 +1,6 @@
 import 'package:Interfaz_Proyecto/backend/classes/DataAlumno.dart';
 
+import 'ConfigAlumno.dart';
 import 'HorarioAlumnoUI.dart';
 import 'LoginUI.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,8 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                 CustomListTile(Icons.list_alt_rounded, "Mis Asistencias",
                     () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
                 CustomListTile(Icons.settings, "Configuración",
-                    () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
+                    () => {Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ConfigAlumno())) }),
                 CustomListTile(
                     Icons.sensor_door_rounded,
                     "Salir",

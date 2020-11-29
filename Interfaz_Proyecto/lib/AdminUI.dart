@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'AddAlumnoUI.dart';
 import 'AddDocenteUI.dart';
 import 'AddMateriaUI.dart';
-import 'LoginUI.dart';
 
 class AdminPagina extends StatefulWidget {
   //final String response;

@@ -1,3 +1,4 @@
+import 'package:Interfaz_Proyecto/ConfigDocente.dart';
 import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/LoginUI.dart';
 import 'package:Interfaz_Proyecto/backend/classes/DataDocente.dart';
@@ -6,8 +7,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
-
 import 'AdminUI.dart';
+import 'HorarioDocente.dart';
 
 class DocentePagina extends StatefulWidget {
   final String response;
@@ -84,7 +85,7 @@ class _DocentePagina extends State<DocentePagina> {
                   ),
                 ),
                 CustomListTile(Icons.calendar_today, "Horarios",
-                    () => {print("Pulso la opcion de horarios")}),
+                    () => {Navigator.push(context,MaterialPageRoute(builder: (context) => HorarioDocentePagina())) }),
                 CustomListTile(Icons.list_alt_rounded, "Ver Listas",
                     () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
                 CustomListTile(Icons.admin_panel_settings_rounded, "Modo Admin",
@@ -93,7 +94,7 @@ class _DocentePagina extends State<DocentePagina> {
                 CustomListTile(Icons.picture_as_pdf_rounded, "Generar PDF's",
                     () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
                 CustomListTile(Icons.settings, "Configuración",
-                    () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
+                    () => {Navigator.push(context,MaterialPageRoute(builder: (context) => ConfigDocente())) }),
                 CustomListTile(
                     Icons.sensor_door_rounded,
                     "Salir",
@@ -182,7 +183,7 @@ class _DocentePagina extends State<DocentePagina> {
                       borderRadius: BorderRadius.circular(40), 
                       color: Color.fromRGBO(53, 62, 123, 0.1),
                       ),
-                  margin: EdgeInsets.symmetric(horizontal: 50),
+                  margin: EdgeInsets.symmetric(horizontal: 100),
                   child: Center(
                     child: DropdownButtonHideUnderline(
                                           child: DropdownButton<String>(

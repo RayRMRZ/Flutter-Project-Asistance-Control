@@ -3,12 +3,12 @@ import 'package:table_calendar/table_calendar.dart';
 
 
 
-class HorarioAlumnoPagina extends StatefulWidget {
+class HorarioDocentePagina extends StatefulWidget {
   @override
-  _HorarioAlumnoPagina createState() => _HorarioAlumnoPagina();
+  _HorarioDocentePagina createState() => _HorarioDocentePagina();
 }
 
-class _HorarioAlumnoPagina extends State<HorarioAlumnoPagina> {
+class _HorarioDocentePagina extends State<HorarioDocentePagina> {
   CalendarController _controller;
   Map<DateTime,List<dynamic>> _eventos;
   List<dynamic> _eventoSeleccionado;
@@ -56,7 +56,7 @@ class _HorarioAlumnoPagina extends State<HorarioAlumnoPagina> {
           shape: RoundedRectangleBorder(
               borderRadius:
                   BorderRadius.only(bottomRight: Radius.circular(50))),
-          backgroundColor: Color.fromRGBO(53, 132, 230, 1),
+          backgroundColor: Color.fromRGBO(53, 62, 123, 1),
         ),
       ),
       
@@ -88,11 +88,4 @@ class _HorarioAlumnoPagina extends State<HorarioAlumnoPagina> {
       ),
     );
   }
-
-
-
-
-
-
-
 }
