@@ -15,6 +15,7 @@ class EstudiantePagina extends StatefulWidget {
 }
 
 class _EstudiantePagina extends State<EstudiantePagina> {
+
   Widget build(BuildContext context) {
     DataAlumno alumno = new DataAlumno('${widget.response}');
     return Scaffold(
@@ -150,6 +151,7 @@ class _EstudiantePagina extends State<EstudiantePagina> {
       ),
     );
   }
+
 }
 
 // ignore: must_be_immutable

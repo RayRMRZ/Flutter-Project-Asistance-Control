@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+///Enum DialogAction contiene abort y confirm para usar en clase Dialogs.
 enum DialogAction { abort, confirm }
-
+///Clase Dialogs controla AlertDialog.
 class Dialogs {
+
   static Future<DialogAction> confirmAbortDialog(
       {@required BuildContext context,
       @required String title,
