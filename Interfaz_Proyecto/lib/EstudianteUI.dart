@@ -1,5 +1,6 @@
 import 'package:Interfaz_Proyecto/backend/classes/DataAlumno.dart';
 
+import 'HorarioAlumnoUI.dart';
 import 'LoginUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -39,7 +40,9 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                   ),
                 ),
                 CustomListTile(Icons.calendar_today, "Ver Horarios",
-                    () => {print("Pulso la opcion de horarios")}),
+                    () => {Navigator.push(context,
+              MaterialPageRoute(builder: (context) => HorarioAlumnoPagina())) }),
+              
                 CustomListTile(Icons.list_alt_rounded, "Mis Asistencias",
                     () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
                 CustomListTile(Icons.settings, "Configuración",
@@ -83,63 +86,69 @@ class _EstudiantePagina extends State<EstudiantePagina> {
         child: ListView(
           children: [
             Center(
-              child: QrImage(
-                  data: '${alumno.id}', version: QrVersions.auto, size: 320),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 70),
+                child: QrImage(
+                    data: '${alumno.id}', version: QrVersions.auto, size: 320),
+              ),
             ),
-            Container(
-                child: Center(
-                    child: RichText(
-              text: TextSpan(
-                  text: "\nCampus Tehuacán\n\n",
-                  style: TextStyle(color:Colors.teal[200], fontSize: 25 ),
-                  children: [
-                    TextSpan(
-                        text: "Nombre: ",
-                        style: TextStyle(
-                            color:  Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
-                    TextSpan(
-                        text: '${alumno.nombre}\n',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                    TextSpan(
-                        text: "Número de Control: ",
-                        style: TextStyle(
-                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
-                    TextSpan(
-                        text: '${alumno.ncontrol}\n',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                    TextSpan(
-                        text: "Carrera: ",
-                        style: TextStyle(
-                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
-                    TextSpan(
-                        text: '${alumno.carrera}\n',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                    TextSpan(
-                        text: "Correo: ",
-                        style: TextStyle(
-                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
-                    TextSpan(
-                        text: '${alumno.email}\n',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                    TextSpan(
-                        text: "Semestre: ",
-                        style: TextStyle(
-                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
-                    TextSpan(
-                        text: '${alumno.semestre}\n',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                  ]),
-            )),
-            decoration: BoxDecoration(
-            color: Colors.grey[100],
-            borderRadius: BorderRadius.circular(70),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Container(
+                  child: Center(
+                      child: RichText(
+                text: TextSpan(
+                    text: "\nCampus Tehuacán\n\n",
+                    style: TextStyle(color:Colors.teal[200], fontSize: 25 ),
+                    children: [
+                      TextSpan(
+                          text: "Nombre: ",
+                          style: TextStyle(
+                              color:  Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
+                      TextSpan(
+                          text: '${alumno.nombre}\n',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                      TextSpan(
+                          text: "Número de Control: ",
+                          style: TextStyle(
+                              color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
+                      TextSpan(
+                          text: '${alumno.ncontrol}\n',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                      TextSpan(
+                          text: "Carrera: ",
+                          style: TextStyle(
+                              color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
+                      TextSpan(
+                          text: '${alumno.carrera}\n',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                      TextSpan(
+                          text: "Correo: ",
+                          style: TextStyle(
+                              color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
+                      TextSpan(
+                          text: '${alumno.email}\n',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                      TextSpan(
+                          text: "Semestre: ",
+                          style: TextStyle(
+                              color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
+                      TextSpan(
+                          text: '${alumno.semestre}\n',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                    ]),
+              )),
+              decoration: BoxDecoration(
+              color: Colors.grey[100],
+              borderRadius: BorderRadius.circular(50),
 
-            )
+              )
+              ),
             )
           ],
         ),

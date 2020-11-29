@@ -14,42 +14,6 @@ class _AdminPagina extends State<AdminPagina> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      drawer: ClipRRect(
-        borderRadius: BorderRadius.only(bottomRight: Radius.circular(120)),
-        child: Drawer(
-          child: Container(
-            color: Colors.white,
-            child: ListView(
-              physics: NeverScrollableScrollPhysics(),
-              children: <Widget>[
-                Container(
-                  height: 170,
-                  child: UserAccountsDrawerHeader(
-                    accountName: Text(
-                        "Raymundo Ramirez Alvarez"), //Se tiene que adaptar a la info. del docente
-                    accountEmail: Text(
-                        "ReymondARamirez@gmail.com"), //Se tiene que adaptar a la info. del docente
-
-                    currentAccountPicture: CircleAvatar(
-                      backgroundImage: AssetImage(
-                          "Assets/Corbata.png"), //Se tiene que adaptar a la info. del docente
-                    ),
-                  ),
-                ),
-                CustomListTile(
-                    Icons.sensor_door_rounded,
-                    "Salir",
-                    () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginForm()))
-                        }),
-              ],
-            ),
-          ),
-        ),
-      ),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: AppBar(

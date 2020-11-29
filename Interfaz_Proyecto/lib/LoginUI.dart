@@ -62,13 +62,12 @@ class _LoginFormState extends State<LoginForm> {
         if (control.pagDoc == true) {
           helperEmail = "";
           Navigator.push(context,
-              //MaterialPageRoute(builder: (context) => DocentePagina(validation.sendResponse())));
-              MaterialPageRoute(builder: (context) => AdminPagina()));
+              MaterialPageRoute(builder: (context) => DocentePagina(validation.sendResponse())));
+              //MaterialPageRoute(builder: (context) => AdminPagina()));
         } else {
           helperEmail = "";
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => EstudiantePagina(validation.sendResponse())));
-              
         }
       } else {
         //Aqui iría el AlertDialog//

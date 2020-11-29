@@ -6,14 +6,23 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 
+import 'AdminUI.dart';
+
 class DocentePagina extends StatefulWidget {
   final String response;
   DocentePagina(this.response);
-
+  
   @override
   _DocentePagina createState() => _DocentePagina();
 }
+
 class _DocentePagina extends State<DocentePagina> {
+  final List<String> materias = ["Materia", "Fundamentos de telecomunicaciones","Cálculo diferencial","Arquitectura de computadoras","Etica"];
+  String materiaSeleccionada = "Materia";
+
+  final List<String> clases = ["Clase","9am-10am","10am-11pm","11am-12pm","12pm-1pm"];
+  String claseSeleccionada = "Clase";
+
   var result = "Pasar Lista";
 
   Future _scanQR() async {
@@ -73,8 +82,9 @@ DataDocente docente;
                     () => {print("Pulso la opcion de horarios")}),
                 CustomListTile(Icons.list_alt_rounded, "Ver Listas",
                     () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
-                CustomListTile(Icons.person_add, "Registrar Alumnos",
-                    () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
+                CustomListTile(Icons.admin_panel_settings_rounded, "Modo Admin",
+                    () => {Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AdminPagina()))}),
                 CustomListTile(Icons.picture_as_pdf_rounded, "Generar PDF's",
                     () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
                 CustomListTile(Icons.settings, "Configuración",
@@ -117,7 +127,7 @@ DataDocente docente;
       body: ListView(children: <Widget>[
         Container(
             margin: EdgeInsets.only(top: 60.0, left: 10.0, right: 10.0, bottom: 20),
-            height: 180,
+            height: 200,
             child: FlareActor(
               "Assets/Qr loading.flr",
               animation: "scanning",
@@ -132,7 +142,67 @@ DataDocente docente;
               color: Color.fromRGBO(100, 210, 200, 0.8),
             )),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 50.0),
+          child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40), 
+                        color: Color.fromRGBO(53, 62, 123, 0.1),
+                        ),
+                      margin: EdgeInsets.only(top: 50, left: 20, right:20),
+                    child: Center(
+                      child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                                  value: materiaSeleccionada,
+                                  onChanged: (valorMateria){
+                                    setState((){
+                                      materiaSeleccionada = valorMateria;
+                                    });
+                                  },
+                                  items: materias.map<DropdownMenuItem<String>>((valorMateria){
+                                    return DropdownMenuItem(
+                                      child: Center(child: Text(valorMateria)),
+                                      value: valorMateria,
+                                      );
+                                  }).toList(),
+                                ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40), 
+                      color: Color.fromRGBO(53, 62, 123, 0.1),
+                      ),
+                  margin: EdgeInsets.symmetric(horizontal: 50),
+                  child: Center(
+                    child: DropdownButtonHideUnderline(
+                                          child: DropdownButton<String>(
+                                value: claseSeleccionada,
+                                onChanged: (valorClase){
+                                  setState((){
+                                    claseSeleccionada = valorClase;
+                                  });
+                                },
+                                items: clases.map<DropdownMenuItem<String>>((valorClase){
+                                  return DropdownMenuItem(
+                                    child: Center(child: Text(valorClase)),
+                                    value: valorClase,
+                                    );
+                                }).toList(),
+                              ),
+                    ),
+                  ),
+                ),
+
+              ],
+            ),
+       ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 80.0),
           child: OutlineButton(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),

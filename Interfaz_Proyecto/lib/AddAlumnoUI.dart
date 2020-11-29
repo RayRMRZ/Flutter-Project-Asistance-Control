@@ -71,19 +71,21 @@ class _AddAlumnoPagina extends State<AddAlumnoPagina> {
                       ),
                     margin: EdgeInsets.symmetric(horizontal: 70),
                     child: Center(
-                      child: DropdownButton<String>(
-                        value: semestreSeleccionado,
-                        onChanged: (valorSemestre){
-                          setState((){
-                            semestreSeleccionado = valorSemestre;
-                          });
-                        },
-                        items: semestres.map<DropdownMenuItem<String>>((valorSemestre){
-                          return DropdownMenuItem(
-                            child: Center(child: Text(valorSemestre)),
-                            value: valorSemestre,
-                            );
-                        }).toList(),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: semestreSeleccionado,
+                          onChanged: (valorSemestre){
+                            setState((){
+                              semestreSeleccionado = valorSemestre;
+                            });
+                          },
+                          items: semestres.map<DropdownMenuItem<String>>((valorSemestre){
+                            return DropdownMenuItem(
+                              child: Center(child: Text(valorSemestre)),
+                              value: valorSemestre,
+                              );
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ),
