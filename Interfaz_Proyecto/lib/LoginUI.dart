@@ -5,8 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'backend/Validacion.dart';
 import 'EstudianteUI.dart';
 import 'DocenteUI.dart';
-import 'AdminUI.dart';
 
+// ignore: must_be_immutable
 class LoginForm extends StatefulWidget {
   BuildContext contextMain;
   LoginForm(this.contextMain);
@@ -65,6 +65,7 @@ class _LoginFormState extends State<LoginForm> {
             if (await validation.exists(email, password, control)==true) {
         if (control.pagDoc == true) {
           helperEmail = "";
+          FocusScope.of(context).requestFocus(FocusNode());
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -73,14 +74,18 @@ class _LoginFormState extends State<LoginForm> {
           /* Navigator.push(context,
               MaterialPageRoute(builder: (context) => AdminPagina(validation.sendResponse()))); */
             FlushBar_Snack.welcomeMsg(context);
+            
+
         } else {
           helperEmail = "";
+          FocusScope.of(context).requestFocus(FocusNode());
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
                       EstudiantePagina(validation.sendResponse())));
                       FlushBar_Snack.welcomeMsg(context);
+                      FocusScope.of(context).requestFocus(FocusNode());
         }
       } else {}
       }catch(ex){
