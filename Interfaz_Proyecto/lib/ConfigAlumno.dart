@@ -9,7 +9,7 @@ class ConfigAlumno extends StatefulWidget {
 
 class _ConfigAlumno extends State<ConfigAlumno> {
 var _tiempoParaProxClase = new TextEditingController();
-
+final _nuevoPassword = new TextEditingController();
 
 
 
@@ -52,6 +52,27 @@ var _tiempoParaProxClase = new TextEditingController();
                   leading: Icon(Icons.timer),
                   trailing: txtInput("10", _tiempoParaProxClase),
                 ),
+              ],
+            ),
+
+            SettingsSection(
+              title: "Privacidad",
+              tiles: [
+                SettingsTile(
+                  title: "Cambiar Contraseña",
+                  leading: Icon(Icons.lock_open_rounded),
+                ),
+                SettingsTile(
+                  title: "",
+                  leading: Icon(Icons.edit_rounded),
+                  trailing: txtPassword("Nueva Contraseña", _nuevoPassword),   
+                ),
+              ],
+            ),
+
+            SettingsSection(
+              title: "Guardar Cambios",
+              tiles: [
                 SettingsTile(
                   title: 'Guardar Cambios',
                   leading: Icon(Icons.save),
@@ -69,13 +90,7 @@ var _tiempoParaProxClase = new TextEditingController();
                 ),
                   ),
                 ),
-              ],
-            ),
-
-            SettingsSection(
-              tiles: [
-                
-              ],
+              ]
             )
           ],
         )
@@ -112,6 +127,56 @@ var _tiempoParaProxClase = new TextEditingController();
           ),
         ),
       ),
+  );
+}
+
+ bool _passwordVisible = false;
+  @override
+  // ignore: must_call_super
+  void initState() {
+    _passwordVisible = false;
+  }
+Padding txtPassword(String titulo, TextEditingController passwordController) {
+  return Padding(
+    padding: const EdgeInsets.all(0),
+    child: Container(
+      height: 40,
+      width: 330,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(40),
+        color: Color.fromRGBO(53, 62, 123, 0.1),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 0),
+        child: TextFormField(
+          cursorWidth: 3,
+          cursorHeight: 25,
+          textAlign: TextAlign.center,
+          controller: passwordController,
+          obscureText: !_passwordVisible,
+          style: TextStyle(color: Colors.black),
+          //textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(style: BorderStyle.none)),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(style: BorderStyle.none)),
+            hintText: titulo,
+            hintStyle: TextStyle(color: Color.fromRGBO(0, 0, 0, 0.5)),
+            //icon: ImageIcon(AssetImage(icono), color: Colors.white),
+            suffixIcon: IconButton(
+                    icon: Icon(
+                _passwordVisible ? Icons.visibility_rounded : Icons.visibility_off_rounded,
+                color: Color.fromRGBO(53, 62, 123, 1),
+              ),
+              onPressed: () => setState(()  {
+                         _passwordVisible = !_passwordVisible;
+                     })
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 }
 
