@@ -47,8 +47,9 @@ class Validation {
     return conexion_http.respuesta;
   }
   ///[return] Retorna lista dinamica contenedora de clases.
-  List <dynamic> sendColec(){
-
-    return conexion_http.clases;
-  }
+/*   static Future<List<String>> sendColec() async {
+    List <String> clase= conexion_http.nombres;
+    print("TESON: ${clase}");
+    return clase;
+  } */
 }

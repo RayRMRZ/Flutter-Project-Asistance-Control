@@ -1,6 +1,8 @@
 import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/LoginUI.dart';
+
 import 'package:Interfaz_Proyecto/backend/classes/DataDocente.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -19,11 +21,7 @@ class DocentePagina extends StatefulWidget {
 
 class _DocentePagina extends State<DocentePagina> {
   
-  final List<String> materias = ["Materia", "Fundamentos de telecomunicaciones","Cálculo diferencial","Arquitectura de computadoras","Etica"];
-  String materiaSeleccionada = "Materia";
 
-  final List<String> clases = ["Clase","9am-10am","10am-11pm","11am-12pm","12pm-1pm"];
-  String claseSeleccionada = "Clase";
 
   var result = "Pasar Lista";
   DataDocente docente;
@@ -61,6 +59,10 @@ class _DocentePagina extends State<DocentePagina> {
   }
 
   Widget build(BuildContext context) {
+  final List<String> materias = ['Materia', "Fundamentos de telecomunicaciones","Cálculo diferencial","Arquitectura de computadoras","Etica"];
+  String materiaSeleccionada = "Materia";
+  final List<String> clases = ["Clase","9am-10am","10am-11pm","11am-12pm","12pm-1pm"];
+  String claseSeleccionada = "Clase";
      docente = new DataDocente(widget.response);
     return Scaffold(
       drawer: ClipRRect(
