@@ -54,7 +54,7 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginForm()))
+                                  builder: (context) => LoginForm(context)))
                         }),
               ],
             ),
@@ -92,66 +92,61 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                     data: '${alumno.id}', version: QrVersions.auto, size: 320),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+            Card(
               child: Container(
-                  child: Center(
-                      child: RichText(
-                text: TextSpan(
-                    text: "\nCampus Tehuacán\n\n",
-                    style: TextStyle(color:Colors.teal[200], fontSize: 25 ),
-                    children: [
-                      TextSpan(
-                          text: "Nombre: ",
-                          style: TextStyle(
-                              color:  Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
-                      TextSpan(
-                          text: '${alumno.nombre}\n',
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                      TextSpan(
-                          text: "Número de Control: ",
-                          style: TextStyle(
-                              color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
-                      TextSpan(
-                          text: '${alumno.ncontrol}\n',
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                      TextSpan(
-                          text: "Carrera: ",
-                          style: TextStyle(
-                              color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
-                      TextSpan(
-                          text: '${alumno.carrera}\n',
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                      TextSpan(
-                          text: "Correo: ",
-                          style: TextStyle(
-                              color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
-                      TextSpan(
-                          text: '${alumno.email}\n',
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                      TextSpan(
-                          text: "Semestre: ",
-                          style: TextStyle(
-                              color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
-                      TextSpan(
-                          text: '${alumno.semestre}\n',
-                          style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
-                    ]),
-              )),
-              decoration: BoxDecoration(
-              color: Colors.grey[100],
-              borderRadius: BorderRadius.circular(50),
-
-              )
-              ),
+                child: Center(
+                    child: RichText(
+              text: TextSpan(
+                  text: "\nCampus Tehuacán\n\n",
+                  style: TextStyle(color:Colors.teal[200], fontSize: 25 ),
+                  children: [
+                    TextSpan(
+                        text: "Nombre: ",
+                        style: TextStyle(
+                            color:  Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
+                    TextSpan(
+                        text: '${alumno.nombre}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                    TextSpan(
+                        text: "Número de Control: ",
+                        style: TextStyle(
+                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
+                    TextSpan(
+                        text: '${alumno.ncontrol}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                    TextSpan(
+                        text: "Carrera: ",
+                        style: TextStyle(
+                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
+                    TextSpan(
+                        text: '${alumno.carrera}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                    TextSpan(
+                        text: "Correo: ",
+                        style: TextStyle(
+                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17  )),
+                    TextSpan(
+                        text: '${alumno.email}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                    TextSpan(
+                        text: "Semestre: ",
+                        style: TextStyle(
+                            color: Colors.blue[200], fontWeight: FontWeight.bold,fontSize: 17 )),
+                    TextSpan(
+                        text: '${alumno.semestre}\n',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w300,fontSize: 18 )),
+                  ]),
+            )),
+            )
             )
           ],
-        ),
+        
+        )
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:Interfaz_Proyecto/Dialogs.dart';
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -19,10 +20,11 @@ class Conexion_http {
           body: {'identifier': email, 'password': password});
 
       if (resp.statusCode == 200) {
-        getDatatoCompare();
+        _getDatatoCompare();
         _respuesta=resp.body;
         completer.complete('Se ha realizado la petición http\n');
       } else {
+        
         completer.completeError(
             'Ocurrió un error con la petición! ${resp.statusCode}');
       }
@@ -32,8 +34,7 @@ class Conexion_http {
     return completer.future;
   }
 
-  getDatatoCompare() async {
+  _getDatatoCompare() async {
     _flag = 1;
   }
-
 }

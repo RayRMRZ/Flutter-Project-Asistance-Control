@@ -5,13 +5,16 @@ import 'AddMateriaUI.dart';
 import 'LoginUI.dart';
 
 class AdminPagina extends StatefulWidget {
+  //final String response;
+  //AdminPagina(this.response);
   @override
   _AdminPagina createState() => _AdminPagina();
 }
 
 class _AdminPagina extends State<AdminPagina> {
-  @override
+  @override 
   Widget build(BuildContext context) {
+    
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
