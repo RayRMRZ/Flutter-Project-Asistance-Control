@@ -56,5 +56,15 @@ static void errorQrMsg(BuildContext context,String msg){
     forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
   )..show(context);
 }
-
+static void notifSelected(BuildContext context,String msg){
+  Flushbar(
+    message: msg,
+    icon: Icon(
+      Icons.notification_important,
+      size: 28,
+      color: Colors.purple,
+    ),
+    duration: Duration(seconds: 5),
+  )..show(context);
+}
 }

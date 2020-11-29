@@ -1,7 +1,8 @@
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
+import 'package:flushbar/flushbar.dart';
 import 'backend/Validacion.dart';
-
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -17,6 +18,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+    FlutterLocalNotificationsPlugin fltrNotification;
   @override
   Widget build(BuildContext contextLogin) {
     return GestureDetector(
@@ -50,14 +52,14 @@ class _LoginFormState extends State<LoginForm> {
       ),
     );
   }
-
+Validation validation = new Validation();
   signIn() async {
     //-----------------------------codigo para verificar login------------------------------
     String email = idController.text;
     String password = passwordController.text;
 
     Control control = new Control();
-    Validation validation = new Validation();
+    
 
     print('El correo es de la tabla: ${control.inicio(email)}');
 
@@ -73,9 +75,9 @@ class _LoginFormState extends State<LoginForm> {
               MaterialPageRoute(
                   builder: (context) =>
                       DocentePagina(validation.sendResponse())));
-          /* Navigator.push(context,
+          /*  Navigator.push(context,
               MaterialPageRoute(builder: (context) => AdminPagina(validation.sendResponse()))); */
-            FlushBar_Snack.welcomeMsg(context);
+              
         } else {
           helperEmail = "";
           Navigator.push(
@@ -83,7 +85,7 @@ class _LoginFormState extends State<LoginForm> {
               MaterialPageRoute(
                   builder: (context) =>
                       EstudiantePagina(validation.sendResponse())));
-                      FlushBar_Snack.welcomeMsg(context);
+                      
         }
       } else {}
       }catch(ex){
@@ -105,6 +107,7 @@ class _LoginFormState extends State<LoginForm> {
         onPressed: () {
           setState(() {
             signIn();
+            _showNotification();
           });
         },
         color: Colors.black26,
@@ -186,13 +189,35 @@ Focus textoSeccion() {
       ),
     );
   }
+  Future _showNotification()async{
+    var androidDetails=new AndroidNotificationDetails('ALGO ID', 'NOMBRE', 'Descripción',importance: Importance.max);
+    var iSODetails=new IOSNotificationDetails();
+    var generalNotificationsDetails=new NotificationDetails(android: androidDetails,iOS: iSODetails);
 
+    /* await fltrNotification.show(0, 'Check-In', 'Faltan 5 min para tu siguiente clase', 
+    generalNotificationsDetails,payload: 'Visualiza tu horario de clases'); */
+    /* FlushBar_Snack.notifSelected(context,'Tienes notificaciones importantes por ver!' ); */
+    
+    var scheduleTime=DateTime.now().add(new Duration( seconds: 10));
+    print(scheduleTime);
+    fltrNotification.schedule(0, 'Notificación', 'Programada', DateTime(2020,11,28,18,48), generalNotificationsDetails,payload: 'Visualiza tu horario de clases');
+
+  }
   bool _passwordVisible = false;
   @override
   void initState() {
+    super.initState();
+    var androidInitialize= new AndroidInitializationSettings('app_icon');
+    var iOSinitialize=new IOSInitializationSettings();
+    var macOsInitialize=new MacOSInitializationSettings();
+    var initilizationsSettings = new InitializationSettings(android: androidInitialize,iOS: iOSinitialize,macOS: macOsInitialize);
+    fltrNotification =new FlutterLocalNotificationsPlugin();
+    fltrNotification.initialize(initilizationsSettings,onSelectNotification: notifSelected);
     _passwordVisible = false;
   }
-
+  Future notifSelected(String payload) async {
+  FlushBar_Snack.notifSelected(context,payload);
+  }
   TextFormField txtPassword(String titulo, String icono) {
   return TextFormField(
     controller: passwordController,
