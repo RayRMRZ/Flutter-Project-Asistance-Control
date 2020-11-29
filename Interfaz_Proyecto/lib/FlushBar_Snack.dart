@@ -3,9 +3,11 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-
+///Mixin FlushBar_Snack contiene métodos para mostrar mensajes emergentes 
+///parecidos al snackbar de Scaffold.
 mixin FlushBar_Snack {
-
+///Muestra un snackbar de error en loginUI,
+///[param] recibe contexto de widget (context).
 static void showConexionError(BuildContext context){
   Flushbar(
     title: "Oh no! ha ocurrido un error!",
@@ -27,6 +29,8 @@ static void showConexionError(BuildContext context){
     backgroundColor: Color.fromRGBO(53, 62, 123, 1),
   )..show(context);
 }
+///Muestra un snackbar de bienvenida en loginUI,
+///[param] recibe contexto de widget (context).
 static void welcomeMsg(BuildContext context){
   Flushbar(
     message: 'Bienvenido!',
@@ -38,6 +42,8 @@ static void welcomeMsg(BuildContext context){
     duration: Duration(seconds: 3),
   )..show(context);
 }
+///Muestra un snackbar de error en DocenteUI método qr_code,
+///[param] recibe contexto de widget (context).
 static void errorQrMsg(BuildContext context,String msg){
   Flushbar(
     message: msg,
@@ -50,5 +56,15 @@ static void errorQrMsg(BuildContext context,String msg){
     forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
   )..show(context);
 }
-
+static void notifSelected(BuildContext context,String msg){
+  Flushbar(
+    message: msg,
+    icon: Icon(
+      Icons.notification_important,
+      size: 28,
+      color: Colors.purple,
+    ),
+    duration: Duration(seconds: 5),
+  )..show(context);
+}
 }
