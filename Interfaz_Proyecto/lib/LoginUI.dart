@@ -1,6 +1,5 @@
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
-import 'package:flushbar/flushbar.dart';
 import 'backend/Validacion.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
@@ -203,6 +202,7 @@ Focus textoSeccion() {
     
     var scheduleTime=DateTime.now().add(new Duration( seconds: 10));
     print(scheduleTime);
+    // ignore: deprecated_member_use
     fltrNotification.schedule(0, 'Notificación', 'Programada', scheduleTime, generalNotificationsDetails,payload: 'Visualiza tu horario de clases');
 
   }

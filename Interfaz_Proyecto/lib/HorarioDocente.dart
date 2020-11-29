@@ -11,6 +11,7 @@ class HorarioDocentePagina extends StatefulWidget {
 class _HorarioDocentePagina extends State<HorarioDocentePagina> {
   CalendarController _controller;
   Map<DateTime,List<dynamic>> _eventos;
+  // ignore: unused_field
   List<dynamic> _eventoSeleccionado;
   
 
