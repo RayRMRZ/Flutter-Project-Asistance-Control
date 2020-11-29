@@ -1,3 +1,4 @@
+import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/LoginUI.dart';
 import 'package:Interfaz_Proyecto/backend/classes/DataDocente.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class DocentePagina extends StatefulWidget {
 }
 
 class _DocentePagina extends State<DocentePagina> {
+  
   final List<String> materias = ["Materia", "Fundamentos de telecomunicaciones","Cálculo diferencial","Arquitectura de computadoras","Etica"];
   String materiaSeleccionada = "Materia";
 
@@ -24,6 +26,7 @@ class _DocentePagina extends State<DocentePagina> {
   String claseSeleccionada = "Clase";
 
   var result = "Pasar Lista";
+  DataDocente docente;
 
   Future _scanQR() async {
     try {
@@ -42,19 +45,21 @@ class _DocentePagina extends State<DocentePagina> {
       } else {
         setState(() {
           result = "Unknown Error$e";
+          FlushBar_Snack.errorQrMsg(context, result);
         });
       }
     } on FormatException {
       setState(() {
-        result = "Presionaste el boton antes de escanear algo";
+        result = 'Aún no haz escaneado, Escanear?';
+        FlushBar_Snack.errorQrMsg(context, 'Presionaste el boton antes de escanear algo');
       });
     } catch (e) {
       setState(() {
-        result = "Unknown Error$e";
+        FlushBar_Snack.errorQrMsg(context, "Unknown Error$e");
       });
     }
   }
-DataDocente docente;
+
   Widget build(BuildContext context) {
      docente = new DataDocente(widget.response);
     return Scaffold(
@@ -96,7 +101,7 @@ DataDocente docente;
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginForm()))
+                                  builder: (context) => LoginForm(context)))
                         }),
               ],
             ),

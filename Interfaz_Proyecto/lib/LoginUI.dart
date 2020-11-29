@@ -1,3 +1,4 @@
+import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/backend/ControlVentanas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,16 +8,18 @@ import 'DocenteUI.dart';
 import 'AdminUI.dart';
 
 class LoginForm extends StatefulWidget {
+  BuildContext contextMain;
+  LoginForm(this.contextMain);
   @override
   _LoginFormState createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contextLogin) {
     return GestureDetector(
       onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
+        FocusScopeNode currentFocus = FocusScope.of(contextLogin);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
@@ -56,21 +59,33 @@ class _LoginFormState extends State<LoginForm> {
 
     print('El correo es de la tabla: ${control.inicio(email)}');
     if (validation.isCorrect(email)) {
+      
       print('El correo: $email ===> es valido');
-
-      if (await validation.exists(email, password,control)) {
+      try{
+            if (await validation.exists(email, password, control)==true) {
         if (control.pagDoc == true) {
           helperEmail = "";
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => DocentePagina(validation.sendResponse())));
-              //MaterialPageRoute(builder: (context) => AdminPagina()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      DocentePagina(validation.sendResponse())));
+          /* Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AdminPagina(validation.sendResponse()))); */
+            FlushBar_Snack.welcomeMsg(context);
         } else {
           helperEmail = "";
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => EstudiantePagina(validation.sendResponse())));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      EstudiantePagina(validation.sendResponse())));
+                      FlushBar_Snack.welcomeMsg(context);
         }
-      } else {
-        //Aqui iría el AlertDialog//
+      } else {}
+      }catch(ex){
+        FlushBar_Snack.showConexionError(context);
+        print('Excepción $ex');
       }
     } else {
       helperEmail = 'El correo es inválido';

@@ -6,7 +6,7 @@ bool _pagAdmin =false;
 
 String inicio(String email){
 var pattern =
-        r'^(L)[0-9]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[a-z]{2,3})$';
+        r'^(L|l)[0-9]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[a-z]{2,3})$';
 var regExp = RegExp(pattern);
     
 var _; var tabla;   
