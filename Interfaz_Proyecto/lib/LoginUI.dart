@@ -77,7 +77,8 @@ Validation validation = new Validation();
                       DocentePagina(validation.sendResponse())));
           /*  Navigator.push(context,
               MaterialPageRoute(builder: (context) => AdminPagina(validation.sendResponse()))); */
-              
+             
+             
         } else {
           helperEmail = "";
           FocusScope.of(context).requestFocus(FocusNode());
@@ -109,7 +110,7 @@ Validation validation = new Validation();
         onPressed: () {
           setState(() {
             signIn();
-            _showNotification();
+            _showNotification(); 
           });
         },
         color: Colors.black26,
@@ -192,7 +193,7 @@ Focus textoSeccion() {
     );
   }
   Future _showNotification()async{
-    var androidDetails=new AndroidNotificationDetails('ALGO ID', 'NOMBRE', 'Descripción',importance: Importance.max);
+    var androidDetails=new AndroidNotificationDetails('ID', 'Check-In', 'Notificación',importance: Importance.max);
     var iSODetails=new IOSNotificationDetails();
     var generalNotificationsDetails=new NotificationDetails(android: androidDetails,iOS: iSODetails);
 
@@ -202,15 +203,14 @@ Focus textoSeccion() {
     
     var scheduleTime=DateTime.now().add(new Duration( seconds: 10));
     print(scheduleTime);
-    // ignore: deprecated_member_use
-    fltrNotification.schedule(0, 'Notificación', 'Programada', scheduleTime, generalNotificationsDetails,payload: 'Visualiza tu horario de clases');
+    fltrNotification.schedule(0, 'Check-In', 'Faltan 10 min para tu siguiente clase', scheduleTime, generalNotificationsDetails,payload: 'Visualiza tu horario de clases');
 
   }
   bool _passwordVisible = false;
   @override
   void initState() {
     super.initState();
-    var androidInitialize= new AndroidInitializationSettings('app_icon');
+    var androidInitialize= new AndroidInitializationSettings('icon_app');
     var iOSinitialize=new IOSInitializationSettings();
     var macOsInitialize=new MacOSInitializationSettings();
     var initilizationsSettings = new InitializationSettings(android: androidInitialize,iOS: iOSinitialize,macOS: macOsInitialize);
