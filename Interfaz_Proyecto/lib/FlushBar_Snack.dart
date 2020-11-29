@@ -16,11 +16,11 @@ static void showConexionError(BuildContext context){
     icon: Icon(
       Icons.connect_without_contact_sharp,
       size: 28,
-      color: Colors.teal[300],
+      color: Color.fromRGBO(53, 132, 230, 1),
     ),
     boxShadows: [
       BoxShadow(
-        color: Colors.teal,
+        color: Color.fromRGBO(53, 132, 230, 1),
         offset: Offset(3,5),
         blurRadius:8,
       ),

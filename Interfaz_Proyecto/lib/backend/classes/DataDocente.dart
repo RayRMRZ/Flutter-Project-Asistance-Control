@@ -1,7 +1,10 @@
+import 'package:Interfaz_Proyecto/Dialogs.dart';
+import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/backend/classes/Clase.dart';
 import 'package:Interfaz_Proyecto/backend/classes/DataDocenteN.dart';
 import 'package:Interfaz_Proyecto/backend/classes/Materia.dart';
 import 'package:Interfaz_Proyecto/backend/classes/UsuarioD.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 ///Clase DataDocente contiene los atributos del usuario tipo Docente.
 class DataDocente {
@@ -11,8 +14,8 @@ class DataDocente {
   String _email;
   String _nombre;
   String _area;
-  List<String> _nombresMateria = ['ID docente:'];
-  List<String>_idMateria = ['Materias:'];
+  List<String> _nombresMateria = [];
+  List<String>_idMateria = [];
   List<String>_horaI = ['Inicial:'];
   List<String> _horaF = ['Final:'];
   String response;
@@ -31,23 +34,30 @@ class DataDocente {
   }
   ///Método para añadir asistencia por método CRUD hacia API tabla asistencias,
   ///[param] recibe id del método qr_code (idenity).
-   addAssistence(String idenity)async {
-    try{
-    print(idenity+'Es igual: 5fbc568bb202ba0017799f82');
+   addAssistence(String idenity, String materia,BuildContext context)async {
+    
+    if(_nombresMateria.contains(materia)){
+      /* print(_nombresMateria.indexWhere((matter) => matter == materia)); */
+          try{/* print('Seleccionó: $materia'); */
+    
     http.Response asistence = await http.post('https://credencia.herokuapp.com/asistencias',
     body:
     {"fecha": '${DateTime.now()}',
     "asistencia": 'true',
     "alumno": '$idenity',
-    "clase": "5fb4c651dfe83c001727cbfd"}
+    "clase": '${_idMateria[_nombresMateria.indexWhere((matter) => matter == materia)]}'}
     );
     if(asistence.statusCode==200){
-      print("Asistencia añadida");
+    FlushBar_Snack.notifSelected(context, 'Asistencia añadida');
     }else{
       print('No se pudo añadir la asistencia');
     }
     }catch(ex){
     print('ErrorExc: $ex');
+    }
+    }else{
+      FlushBar_Snack.errorQrMsg(context, 'Asistencia no añadida');
+      print("Asistencia no añadida");
     }
   }
   obtenerClases()async{
@@ -109,9 +119,9 @@ class DataDocente {
   ///[return] nombres de clases.
   List<String> get nombresMateria => _nombresMateria;
   ///[return] hora inicial.
-  List<dynamic> get horaI => _horaI;
+  List<String> get horaI => _horaI;
 ///[return] hora final.
-  List<dynamic> get horaF => _horaF;
+  List<String> get horaF => _horaF;
 ///[return] identificador de materia.
-  List<dynamic> get idMateria => _idMateria;
+  List<String> get idMateria => _idMateria;
 }

@@ -14,16 +14,13 @@ import 'AdminUI.dart';
 class DocentePagina extends StatefulWidget {
   final String response;
   DocentePagina(this.response);
-  
+
   @override
   _DocentePagina createState() => _DocentePagina();
 }
 
 class _DocentePagina extends State<DocentePagina> {
-  
-
-
-  var result = "Pasar Lista";
+  var result = "Pasar lista";
   DataDocente docente;
 
   Future _scanQR() async {
@@ -31,9 +28,8 @@ class _DocentePagina extends State<DocentePagina> {
       var qrResult = await BarcodeScanner.scan();
       setState(() {
         result = qrResult.toString();
-        print("Haciendo la asistencia ${docente.addAssistence(result)}");
-        result = 'Pasar una nueva asístencia?';
-
+        print("Generando la asistencia ${docente.addAssistence(result,materiaSeleccionada,context)}");
+        result = '¿Pasar una nueva asístencia?';
       });
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
@@ -42,28 +38,46 @@ class _DocentePagina extends State<DocentePagina> {
         });
       } else {
         setState(() {
-          result = "Unknown Error$e";
+          result = "Error$e";
           FlushBar_Snack.errorQrMsg(context, result);
         });
       }
     } on FormatException {
       setState(() {
-        result = 'Aún no haz escaneado, Escanear?';
-        FlushBar_Snack.errorQrMsg(context, 'Presionaste el boton antes de escanear algo');
+        result = 'Aún no ha escaneado nada, ¿escanear?';
+        FlushBar_Snack.errorQrMsg(
+            context, 'Presionaste el boton antes de escanear algo');
       });
     } catch (e) {
       setState(() {
-        FlushBar_Snack.errorQrMsg(context, "Unknown Error$e");
+        FlushBar_Snack.errorQrMsg(context, "Error$e");
       });
     }
   }
 
+  Future<Null> _refreshSelect() async {
+    try {
+      if (materias.length == 1) {
+        print(docente.nombresMateria);
+        materias.addAll(docente.nombresMateria);
+        clases.addAll(docente.horaI);
+        await Future.delayed(Duration(seconds: 3));
+      } else {
+        print(materias);
+      }
+    } catch (ex) {
+      print('Ah ocurrido un error');
+    }
+  }
+
+  List<String> materias = ['Materias:'];
+  String materiaSeleccionada = "Materias:";
+
+  List<String> clases = ["Hora"];
+  String claseSeleccionada = "Hora";
+
   Widget build(BuildContext context) {
-  final List<String> materias = ['Materia', "Fundamentos de telecomunicaciones","Cálculo diferencial","Arquitectura de computadoras","Etica"];
-  String materiaSeleccionada = "Materia";
-  final List<String> clases = ["Clase","9am-10am","10am-11pm","11am-12pm","12pm-1pm"];
-  String claseSeleccionada = "Clase";
-     docente = new DataDocente(widget.response);
+    docente = new DataDocente(widget.response);
     return Scaffold(
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(bottomRight: Radius.circular(120)),
@@ -76,8 +90,10 @@ class _DocentePagina extends State<DocentePagina> {
                 Container(
                   height: 170,
                   child: UserAccountsDrawerHeader(
-                    accountName: Text(docente.nombre), //Se tiene que adaptar a la info. del docente
-                    accountEmail: Text(docente.email), //Se tiene que adaptar a la info. del docente
+                    accountName: Text(docente
+                        .nombre), //Se tiene que adaptar a la info. del docente
+                    accountEmail: Text(docente
+                        .email), //Se tiene que adaptar a la info. del docente
 
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: AssetImage(
@@ -89,9 +105,15 @@ class _DocentePagina extends State<DocentePagina> {
                     () => {print("Pulso la opcion de horarios")}),
                 CustomListTile(Icons.list_alt_rounded, "Ver Listas",
                     () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
-                CustomListTile(Icons.admin_panel_settings_rounded, "Modo Admin",
-                    () => {Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AdminPagina()))}),
+                CustomListTile(
+                    Icons.admin_panel_settings_rounded,
+                    "Modo Admin",
+                    () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminPagina()))
+                        }),
                 CustomListTile(Icons.picture_as_pdf_rounded, "Generar PDF's",
                     () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
                 CustomListTile(Icons.settings, "Configuración",
@@ -131,98 +153,104 @@ class _DocentePagina extends State<DocentePagina> {
 
       // Seccion abajo del AppBar-----------------------------------------------------------------------
       //body:
-      body: ListView(children: <Widget>[
-        Container(
-            margin: EdgeInsets.only(top: 60.0, left: 10.0, right: 10.0, bottom: 20),
-            height: 200,
-            child: FlareActor(
-              "Assets/Qr loading.flr",
-              animation: "scanning",
-              color: Color.fromRGBO(53, 62, 123, 1),
-            ) //animation:(show|loading|camera|scanning)
-            ),
-        Container(
-            height: 30,
-            child: FlareActor(
-              "Assets/wait.flr",
-              animation: "loading",
-              color: Color.fromRGBO(100, 210, 200, 0.8),
-            )),
-        Container(
-          child: Column(
+      body: RefreshIndicator(
+        color: Color.fromRGBO(53, 132, 230, 1),
+        onRefresh: _refreshSelect,
+        child: ListView(children: <Widget>[
+          Container(
+              margin: EdgeInsets.only(
+                  top: 60.0, left: 10.0, right: 10.0, bottom: 20),
+              height: 200,
+              child: FlareActor(
+                "Assets/Qr loading.flr",
+                animation: "scanning",
+                color: Color.fromRGBO(53, 62, 123, 1),
+              ) //animation:(show|loading|camera|scanning)
+              ),
+          Container(
+              height: 30,
+              child: FlareActor(
+                "Assets/wait.flr",
+                animation: "loading",
+                color: Color.fromRGBO(53, 132, 230, 1),
+              )),
+          Container(
+            child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(40), 
-                        color: Color.fromRGBO(53, 62, 123, 0.1),
-                        ),
-                      margin: EdgeInsets.only(top: 50, left: 20, right:20),
+                      borderRadius: BorderRadius.circular(40),
+                      color: Color.fromRGBO(53, 62, 123, 0.1),
+                    ),
+                    margin: EdgeInsets.only(top: 25, left: 20, right: 20),
                     child: Center(
                       child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                                  value: materiaSeleccionada,
-                                  onChanged: (valorMateria){
-                                    setState((){
-                                      materiaSeleccionada = valorMateria;
-                                    });
-                                  },
-                                  items: materias.map<DropdownMenuItem<String>>((valorMateria){
-                                    return DropdownMenuItem(
-                                      child: Center(child: Text(valorMateria)),
-                                      value: valorMateria,
-                                      );
-                                  }).toList(),
-                                ),
+                        child: DropdownButton<String>(
+                          value: materiaSeleccionada,
+                          onChanged: (valorMateria) {
+                            setState(() {
+                              materiaSeleccionada = valorMateria;
+                            });
+                          },
+                          items: materias
+                              .map<DropdownMenuItem<String>>((valorMateria) {
+                            return DropdownMenuItem(
+                              child: Center(child: Text(valorMateria)),
+                              value: valorMateria,
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ),
                 ),
                 Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40), 
-                      color: Color.fromRGBO(53, 62, 123, 0.1),
-                      ),
+                    borderRadius: BorderRadius.circular(40),
+                    color: Color.fromRGBO(53, 62, 123, 0.1),
+                  ),
                   margin: EdgeInsets.symmetric(horizontal: 50),
                   child: Center(
                     child: DropdownButtonHideUnderline(
-                                          child: DropdownButton<String>(
-                                value: claseSeleccionada,
-                                onChanged: (valorClase){
-                                  setState((){
-                                    claseSeleccionada = valorClase;
-                                  });
-                                },
-                                items: clases.map<DropdownMenuItem<String>>((valorClase){
-                                  return DropdownMenuItem(
-                                    child: Center(child: Text(valorClase)),
-                                    value: valorClase,
-                                    );
-                                }).toList(),
-                              ),
+                      child: DropdownButton<String>(
+                        value: claseSeleccionada,
+                        onChanged: (valorClase) {
+                          setState(() {
+                            claseSeleccionada = valorClase;
+                          });
+                        },
+                        items:
+                            clases.map<DropdownMenuItem<String>>((valorClase) {
+                          return DropdownMenuItem(
+                            child: Center(child: Text(valorClase)),
+                            value: valorClase,
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
                 ),
-
               ],
             ),
-       ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 80.0),
-          child: OutlineButton(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Text(result, style: TextStyle(fontSize: 18 )),
-            ),
-            onPressed: _scanQR,
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-            color: Colors.white54,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           ),
-        ),
-      ]),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+            child: OutlineButton(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(result, style: TextStyle(fontSize: 18)),
+              ),
+              onPressed: _scanQR,
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+              color: Colors.white54,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)),
+            ),
+          ),
+        ]),
+      ),
     );
   }
 }
