@@ -105,8 +105,7 @@ class _DocentePagina extends State<DocentePagina> {
                 ),
                 CustomListTile(Icons.calendar_today, "Horarios",
                     () => {Navigator.push(context,MaterialPageRoute(builder: (context) => HorarioDocentePagina())) }),
-                CustomListTile(Icons.list_alt_rounded, "Ver Listas",
-                    () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
+
                 CustomListTile(
                     Icons.admin_panel_settings_rounded,
                     "Modo Admin",
@@ -116,8 +115,7 @@ class _DocentePagina extends State<DocentePagina> {
                               MaterialPageRoute(
                                   builder: (context) => AdminPagina()))
                         }),
-                CustomListTile(Icons.picture_as_pdf_rounded, "Generar PDF's",
-                    () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
+
                 CustomListTile(Icons.settings, "Configuración",
                     () => {Navigator.push(context,MaterialPageRoute(builder: (context) => ConfigDocente())) }),
                 CustomListTile(

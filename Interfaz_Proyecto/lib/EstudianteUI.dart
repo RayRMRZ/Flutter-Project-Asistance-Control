@@ -44,9 +44,6 @@ class _EstudiantePagina extends State<EstudiantePagina> {
                 CustomListTile(Icons.calendar_today, "Ver Horarios",
                     () => {Navigator.push(context,
               MaterialPageRoute(builder: (context) => HorarioAlumnoPagina())) }),
-              
-                CustomListTile(Icons.list_alt_rounded, "Mis Asistencias",
-                    () => {/*FUNCION DE LO QUE HACE EL BOTON*/}),
                 CustomListTile(Icons.settings, "Configuración",
                     () => {Navigator.push(context,
               MaterialPageRoute(builder: (context) => ConfigAlumno())) }),
