@@ -22,7 +22,7 @@ class Conexion_http {
     try {
       final http.Response resp = await http.post('https://credencia.herokuapp.com/auth/local',
           body: {'identifier': email, 'password': password});
-          print(resp.body);
+          /* print(resp.body); */
       if (resp.statusCode == 200) {
         _getDatatoCompare();
         _respuesta = resp.body;

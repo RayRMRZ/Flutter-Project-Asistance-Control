@@ -47,11 +47,14 @@ dev_dependencies:
   #http: any
   #shared_preferances: any
   flutter_launcher_icons: "^0.8.0"
-
+  flutter_launcher_name: "^0.0.1"
 flutter_icons:
-  android: true
   ios: true
+  android: true
   image_path: "Assets/icon.png"
+  
+flutter_launcher_name:
+  name: "Check-In"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

@@ -30,12 +30,13 @@ class _DocentePagina extends State<DocentePagina> {
       setState(() {
         result = qrResult.toString();
         print("Generando la asistencia ${docente.addAssistence(result,materiaSeleccionada,context)}");
-        result = '¿Pasar una nueva asistencia?';
+        result = '¿Registrar otra asistencia?';
       });
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
-          result = "El permiso de la cámara fue denegado.";
+          result = "Acepte los permisos para usar el Escaner QR.";
+          FlushBar_Snack.errorQrMsg(context, 'El permiso de la cámara fue denegado.');
         });
       } else {
         setState(() {

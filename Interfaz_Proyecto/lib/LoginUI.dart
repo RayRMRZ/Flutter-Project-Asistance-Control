@@ -199,7 +199,7 @@ Focus textoSeccion() {
     /* await fltrNotification.show(0, 'Check-In', 'Faltan 5 min para tu siguiente clase', 
     generalNotificationsDetails,payload: 'Visualiza tu horario de clases'); */
     /* FlushBar_Snack.notifSelected(context,'Tienes notificaciones importantes por ver!' ); */
-    var scheduleTime=DateTime.now().add(new Duration( seconds: 3));
+    var scheduleTime=DateTime.now().add(new Duration( seconds: 150));
     // ignore: deprecated_member_use
     fltrNotification.schedule(0, 'Check-In', 'Faltan 10 min para tu siguiente clase', scheduleTime,
      generalNotificationsDetails,payload: 'Visualiza tu horario de clases');

@@ -12,7 +12,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Interfaz_Proyecto"
+        android:label="Check-In"
         android:icon="@mipmap/ic_launcher">
 
     <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">

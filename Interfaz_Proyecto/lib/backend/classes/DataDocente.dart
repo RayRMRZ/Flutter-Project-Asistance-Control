@@ -101,10 +101,10 @@ class DataDocente {
     }catch(ex){
       print('Excepción: $ex');
     }
-  /*    print(_nombresMateria);
+     /* print(_nombresMateria);
         print(_idMateria);
         print(_horaI);
-        print(_horaF); */
+        print(_horaF); */ 
   }
   static setPassword(String password)async{
     try{

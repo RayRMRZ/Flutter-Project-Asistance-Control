@@ -151,15 +151,15 @@ class _AddAlumnoPagina extends State<AddAlumnoPagina> {
                           Dialogs.confirmAbortDialog(
                             context: context,
                             title: 'Recordatorio:',
-                            body: 'Recuerda terminar el registro de docentes\n' +
-                                'en Strapi https://credencia.herokuapp.com/admin/auth/login',
+                            body: 'Recuerda terminar el registro del alumno en Strapi\n' +
+                                'https://credencia.herokuapp.com/admin/auth/login',
                           );
                         } else {
                           Dialogs.confirmAbortDialog(
                               context: context,
                               title: 'Advertencia',
-                              body: 'El docente no se ha podido añadir\n' +
-                                  'compruebe si ya existe o intente de nuevo!');
+                              body: 'El alumno puede no haberse añadido,\n' +
+                                  'verifique si ya existe o intente de nuevo!');
                         }
                       }
                     } else {
