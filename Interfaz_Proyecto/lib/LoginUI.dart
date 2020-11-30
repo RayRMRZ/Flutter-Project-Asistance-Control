@@ -17,7 +17,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-    FlutterLocalNotificationsPlugin fltrNotification;
+  FlutterLocalNotificationsPlugin fltrNotification;
   @override
   Widget build(BuildContext contextLogin) {
     return GestureDetector(
@@ -52,15 +52,17 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 Validation validation = new Validation();
+///Método de inicio en login.
+///Ejecuta instrucciones de validación y control de pantallas.
   signIn() async {
-    //-----------------------------codigo para verificar login------------------------------
+    
     String email = idController.text;
     String password = passwordController.text;
 
     Control control = new Control();
     
 
-    print('El correo es de la tabla: ${control.inicio(email)}');
+    print('El correo es de usuario: ${control.inicio(email)}');
 
     if (validation.isCorrect(email)) {
       
@@ -74,10 +76,7 @@ Validation validation = new Validation();
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      DocentePagina(validation.sendResponse())));
-          /*  Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AdminPagina(validation.sendResponse()))); */
-             
+                      DocentePagina(validation.sendResponse())));     
              
         } else {
           helperEmail = "";
@@ -110,7 +109,7 @@ Validation validation = new Validation();
         onPressed: () {
           setState(() {
             signIn();
-            _showNotification(); 
+            showNotification(); 
           });
         },
         color: Colors.black26,
@@ -192,22 +191,22 @@ Focus textoSeccion() {
       ),
     );
   }
-  Future _showNotification()async{
+  ///Método para mostrar notificaciones locales.
+    Future showNotification()async{
     var androidDetails=new AndroidNotificationDetails('ID', 'Check-In', 'Notificación',importance: Importance.max);
     var iSODetails=new IOSNotificationDetails();
     var generalNotificationsDetails=new NotificationDetails(android: androidDetails,iOS: iSODetails);
-
     /* await fltrNotification.show(0, 'Check-In', 'Faltan 5 min para tu siguiente clase', 
     generalNotificationsDetails,payload: 'Visualiza tu horario de clases'); */
     /* FlushBar_Snack.notifSelected(context,'Tienes notificaciones importantes por ver!' ); */
-    
-    var scheduleTime=DateTime.now().add(new Duration( seconds: 10));
-    print(scheduleTime);
-    fltrNotification.schedule(0, 'Check-In', 'Faltan 10 min para tu siguiente clase', scheduleTime, generalNotificationsDetails,payload: 'Visualiza tu horario de clases');
-
+    var scheduleTime=DateTime.now().add(new Duration( seconds: 3));
+    // ignore: deprecated_member_use
+    fltrNotification.schedule(0, 'Check-In', 'Faltan 10 min para tu siguiente clase', scheduleTime,
+     generalNotificationsDetails,payload: 'Visualiza tu horario de clases');
   }
   bool _passwordVisible = false;
   @override
+  ///Constructor de inicio.
   void initState() {
     super.initState();
     var androidInitialize= new AndroidInitializationSettings('icon_app');
@@ -218,6 +217,7 @@ Focus textoSeccion() {
     fltrNotification.initialize(initilizationsSettings,onSelectNotification: notifSelected);
     _passwordVisible = false;
   }
+  ///Método de selección de notificación local.
   Future notifSelected(String payload) async {
   FlushBar_Snack.notifSelected(context,payload);
   }

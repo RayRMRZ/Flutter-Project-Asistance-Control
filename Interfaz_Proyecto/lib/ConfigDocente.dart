@@ -1,3 +1,5 @@
+import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
+import 'package:Interfaz_Proyecto/backend/classes/DataDocente.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -67,7 +69,13 @@ class _ConfigDocente extends State<ConfigDocente> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
                 color: Color.fromRGBO(53, 62, 123, 1),
                 onPressed: (){
-                   /*LOGICA PARA GUARDAR EL CAMBIO DE MINUTOS ANTES DE SIGUIETE CLASE*/
+                   if(_nuevoPassword.text.isNotEmpty){
+                     DataDocente.setPassword(_nuevoPassword.text);
+                     FlushBar_Snack.notifSelected(context, 'Contraseña modificada');
+                     _nuevoPassword.text='';
+                   }else{
+                     print('Caja de texto para contraseña vacía');
+                   }
                    FocusScope.of(context).requestFocus(FocusNode());
                    },
                 child: Text("Guardar", style:TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),

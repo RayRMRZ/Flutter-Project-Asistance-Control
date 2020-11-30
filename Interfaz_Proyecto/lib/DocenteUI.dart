@@ -23,7 +23,7 @@ class DocentePagina extends StatefulWidget {
 class _DocentePagina extends State<DocentePagina> {
   var result = "Pasar lista";
   DataDocente docente;
-
+///Método para escanear Qr del alumno.
   Future _scanQR() async {
     try {
       var qrResult = await BarcodeScanner.scan();
@@ -55,7 +55,7 @@ class _DocentePagina extends State<DocentePagina> {
       });
     }
   }
-
+  ///Método para refrescar listview dentro del (body.
   Future<Null> _refreshSelect() async {
     try {
       if (materias.length == 1) {

@@ -1,4 +1,3 @@
-import 'package:Interfaz_Proyecto/Dialogs.dart';
 import 'package:Interfaz_Proyecto/FlushBar_Snack.dart';
 import 'package:Interfaz_Proyecto/backend/classes/Clase.dart';
 import 'package:Interfaz_Proyecto/backend/classes/DataDocenteN.dart';
@@ -8,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 ///Clase DataDocente contiene los atributos del usuario tipo Docente.
 class DataDocente {
-  String _id;
+  static String _id;
   String _idDocente;
   String _username;
   String _email;
@@ -60,10 +59,11 @@ class DataDocente {
       print("Asistencia no añadida");
     }
   }
+  ///Método para obtener clases de docente.
   obtenerClases()async{
     try{
       http.Response docente=await http.get('https://credencia.herokuapp.com/docentes/${_idDocente}');
-      print('https://credencia.herokuapp.com/docentes/${_idDocente}');
+      /* print('https://credencia.herokuapp.com/docentes/${_idDocente}'); */
       if(docente.statusCode==200){
         final jsonDocente=docenteFromJson(docente.body);
         for(int i=0;i<jsonDocente.clases.length;i++){
@@ -101,13 +101,30 @@ class DataDocente {
     }catch(ex){
       print('Excepción: $ex');
     }
-        print(_nombresMateria);
+  /*    print(_nombresMateria);
         print(_idMateria);
         print(_horaI);
-        print(_horaF);
+        print(_horaF); */
   }
-///[return] identificador de docente.
-  String get id => _id;
+  static setPassword(String password)async{
+    try{
+      http.Response reset= await http.put('https://credencia.herokuapp.com/users/$_id',
+        body:
+        {
+          "password":password
+        }
+      ); 
+      print(reset.statusCode);
+      if(reset.statusCode==200){
+        print("Contraseña cambiada");
+      }else{
+        print("Falló el cambio de contraseña");
+      }
+    }catch(ex){
+      print('Excepción $ex');
+    }
+  }
+
 ///[return] nombre de usuario.
   String get username => _username;
 ///[return] correo de docente.
@@ -124,4 +141,10 @@ class DataDocente {
   List<String> get horaF => _horaF;
 ///[return] identificador de materia.
   List<String> get idMateria => _idMateria;
+///getter identificador de usuario.    
+  String get id => _id;
+/// setter identificador de usuario.
+  set id(String id) {
+    _id = id;
+  }
 }

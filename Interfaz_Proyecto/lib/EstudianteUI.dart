@@ -92,7 +92,7 @@ class _EstudiantePagina extends State<EstudiantePagina> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 70),
                 child: QrImage(
-                    data: '${alumno.id}', version: QrVersions.auto, size: 320),
+                    data: '${alumno.idAlumno}', version: QrVersions.auto, size: 320),
               ),
             ),
             Card(

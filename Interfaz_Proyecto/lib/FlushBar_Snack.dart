@@ -34,10 +34,11 @@ static void showConexionError(BuildContext context){
 static void welcomeMsg(BuildContext context){
   Flushbar(
     message: 'Bienvenido!',
+    backgroundColor: Color.fromRGBO(53, 132, 230, 1),
     icon: Icon(
       Icons.login,
       size: 28,
-      color: Color.fromRGBO(53, 132, 230, 1),
+      color: Color.fromRGBO(53, 62, 123, 1),
     ),
     duration: Duration(seconds: 3),
   )..show(context);
@@ -59,10 +60,11 @@ static void errorQrMsg(BuildContext context,String msg){
 static void notifSelected(BuildContext context,String msg){
   Flushbar(
     message: msg,
+    backgroundColor: Color.fromRGBO(53, 132, 230, 1),
     icon: Icon(
       Icons.notification_important,
       size: 28,
-      color: Colors.purple,
+      color: Color.fromRGBO(53, 62, 123, 1),
     ),
     duration: Duration(seconds: 5),
   )..show(context);
